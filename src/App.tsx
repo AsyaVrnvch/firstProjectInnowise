@@ -1,9 +1,15 @@
 import React from 'react';
+import  styled, { css } from "styled-components";
 
 function App() {
+
+  const Heading = styled.h2`
+    color:blue;
+  `;
+
   return (
     <div>
-      <h2>First project</h2>
+      <Heading>First project</Heading>
     </div>
   );
 }
