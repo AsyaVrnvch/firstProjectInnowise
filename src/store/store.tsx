@@ -19,7 +19,12 @@ const middleWare =
         : [routerMiddleware(history), sagaMiddleware]
 
 
-const composeEnchancers = compose;
+const composeEnchancers = 
+process.env.NODE_ENV !== 'production' &&
+        typeof window === 'object' &&
+        window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose
+        ? window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__']({})
+        : compose;
 
 
 const store = createStore(
