@@ -1,18 +1,19 @@
-import Navbar from './components/Navbar';
-import ProtectedRoute from './components/ProtectedRoute';
-import { Link, Route} from 'react-router-dom';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import Main from './pages/Main';
+import Navbar from './components/modals/Navbar/Navbar';
+import ProtectedRoute from './components/modals/ProtectedRoute/ProtectedRoute';
+import { Route } from 'react-router-dom';
+import SignIn from './components/pages/SignIn';
+import SignUp from './components/pages/SignUp';
+import Main from './components/pages/Main';
+import { AppRoutes } from './config/routes'
 
 function App() {
 
   return (
     <div>
       <Navbar/>
-      <Route path='/' exact component={SignIn}/>
-      <Route path='/signup' exact component={SignUp}/>
-      <ProtectedRoute path='/main' exact Component={Main}/>
+      <Route path = { AppRoutes.SignIn } exact component = { SignIn }/>
+      <Route path = { AppRoutes.SignUp } exact component = { SignUp }/>
+      <ProtectedRoute path = { AppRoutes.Main } exact Component = { Main }/>
     </div>
   );
 }
