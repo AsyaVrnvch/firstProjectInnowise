@@ -1,0 +1,7 @@
+build/*
+public/*
+docs/*
+templates/*
+src/react-app-env.d.ts
+src/redux/index.ts
+src/redux/reducers/auth.ts
