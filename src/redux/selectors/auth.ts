@@ -2,18 +2,21 @@ import { createSelector } from "reselect";
 import * as auth from "../reducers/auth";
 import { AppState } from "../reducers";
 
-const authState = (state: AppState): auth.State => state.auth;
 
-export const selectIsAuth = createSelector(authState, (state) => state.isAuth);
+const selectAuthState = (state: AppState):auth.State => state.authState;
+
+export const selectIsAuth = createSelector(
+  selectAuthState, 
+  (state) => state.isAuth);
 export const selectUsername = createSelector(
-  authState,
+  selectAuthState,
   (state) => state.currentUser.username
 );
 export const selectAuthError = createSelector(
-  authState,
+  selectAuthState,
   (state) => state.AuthError
 );
 export const selectRegistrationInfo = createSelector(
-  authState,
+  selectAuthState,
   (state) => state.RegInfo
 );

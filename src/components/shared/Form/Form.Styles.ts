@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   border-radius: 5px;
   margin: 15px auto;
   display: block;

@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import authState, { State } from "./auth";
 
 export interface AppState {
-  auth: State;
+  authState: State;
 }
 
 export default combineReducers({

@@ -1,7 +1,11 @@
 import React from "react";
 import * as Styles from "./Form.Styles";
 
-const Form: React.FC = (props) => {
+interface FormProps {
+  onSubmit?: () => void;
+}
+
+const Form: React.FC<FormProps> = (props) => {
   return <Styles.FormContainer {...props} />;
 };
 

@@ -21,8 +21,8 @@ export interface State {
   };
 }
 
-export default function authState<State>(
-  state = initialState,
+export default function authState(
+  state: State = initialState,
   action: AnyAction
 ) {
   switch (action.type) {
