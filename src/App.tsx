@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/modals/Navbar/Navbar";
+import ProtectedRoute from "./components/modals/ProtectedRoute/ProtectedRoute";
+import { Route } from "react-router-dom";
+import SignIn from "./components/pages/SignIn";
+import SignUp from "./components/pages/SignUp";
+import Main from "./components/pages/Main";
+import { AppRoutes } from "./config/routes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar />
+      <Route path={AppRoutes.SignIn} exact component={SignIn} />
+      <Route path={AppRoutes.SignUp} exact component={SignUp} />
+      <ProtectedRoute path={AppRoutes.Main} exact Component={Main} />
     </div>
   );
 }
