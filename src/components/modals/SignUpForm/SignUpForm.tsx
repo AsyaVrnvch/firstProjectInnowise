@@ -50,12 +50,10 @@ function SignUpForm() {
             render={({ 
               field: { onChange }
             })=>(
-              <>
-                <Input type='text' onChange={onChange} placeholder="Email..."/>
-              </>
+              <Input type='text' onChange={onChange} placeholder="Email..."/>
             )}
           />
-          <Error>{errors.email ? errors.email.message : ''}</Error>
+          <Error>{errors.email?.message}</Error>
           <Label>Enter your password:</Label>
           <Controller
             control={control}
@@ -63,12 +61,10 @@ function SignUpForm() {
             render={({ 
               field: { onChange }
             })=>(
-              <>
-                <Input type='password' onChange={onChange} placeholder="Password..."/>
-              </>
+              <Input type='password' onChange={onChange} placeholder="Password..."/>
             )}
           />
-          <Error>{errors.password ? errors.password.message : ''}</Error>
+          <Error>{errors.password?.message}</Error>
           <Label>Repeate your email:</Label>
           <Controller
             control={control}
@@ -76,12 +72,10 @@ function SignUpForm() {
             render={({ 
               field: { onChange }
             })=>(
-              <>
-                <Input type='password' onChange={onChange} placeholder="Repeate password..."/>
-              </>
+              <Input type='password' onChange={onChange} placeholder="Repeate password..."/>
             )}
           />
-          <Error>{errors.repeatPassword ? errors.repeatPassword.message : ''}</Error>
+          <Error>{errors.repeatPassword?.message}</Error>
           <Label>Enter your username:</Label>
           <Controller
             control={control}
@@ -89,12 +83,10 @@ function SignUpForm() {
             render={({ 
               field: { onChange }
             })=>(
-              <>
-                <Input type='text' onChange={onChange} placeholder="Username..."/>
-              </>
+              <Input type='text' onChange={onChange} placeholder="Username..."/>
             )}
           />
-          <Error>{errors.username ? errors.username.message : ''}</Error>
+          <Error>{errors.username?.message}</Error>
           <Button>Sign up</Button>
         </Form>
       {modalState ? (

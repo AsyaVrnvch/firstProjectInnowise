@@ -44,9 +44,7 @@ function SignInForm() {
             render={({ 
               field: { onChange }
             })=>(
-              <>
-                <Input type='text' onChange={onChange} placeholder="Email..."/>
-              </>
+              <Input type='text' onChange={onChange} placeholder="Email..."/>
             )}
           />
         <Error>{errors.email ? errors.email.message : ''}</Error>
@@ -57,9 +55,7 @@ function SignInForm() {
             render={({ 
               field: { onChange }
             })=>(
-              <>
-                <Input type="password" onChange={onChange} placeholder="Password..."/>
-              </>
+              <Input type="password" onChange={onChange} placeholder="Password..."/>
             )}
           />
         <Error>{errors.password ? errors.password.message : errorAuth}</Error>
