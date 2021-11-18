@@ -30,7 +30,7 @@ function SignInForm() {
           password: data.password,
         })
       );
-      history.replace("/main");
+    history.replace("/main");
   }
 
   return (

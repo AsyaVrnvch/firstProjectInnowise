@@ -20,3 +20,7 @@ export const selectRegistrationInfo = createSelector(
   selectAuthState,
   (state) => state.RegInfo
 );
+export const selectEmail = createSelector(
+  selectAuthState,
+  (state) => state.currentUser.email
+);

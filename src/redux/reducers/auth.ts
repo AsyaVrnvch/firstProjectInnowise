@@ -44,12 +44,12 @@ export default function authState(
     case AuthActionTypes.ERROR_SIGN_UP:
       return {
         ...state,
-        RegInfo: action.payload.error,
+        RegInfo: action.payload.error.message,
         AuthError: "",
-        currentUser: {
-          email: "",
-          username: "",
-        },
+          currentUser: {
+            email: "",
+            username: "",
+          },
         isAuth: false,
       };
 
@@ -62,7 +62,7 @@ export default function authState(
         isAuth: true,
         AuthError: "",
         RegInfo: "",
-        currentUser: action.payload,
+        currentUser: action.payload
       };
 
     case AuthActionTypes.ERROR_SIGN_IN:
@@ -77,7 +77,12 @@ export default function authState(
         AuthError: action.payload.error,
       };
 
-    case AuthActionTypes.LOG_OUT:
+    case AuthActionTypes.SIGNING_OUT:
+      return {
+        ...state
+      };
+
+    case AuthActionTypes.SUCCESS_SIGN_OUT:
       return {
         ...state,
         RegInfo: "",
@@ -87,6 +92,12 @@ export default function authState(
           email: "",
           username: "",
         },
+      };
+
+    case AuthActionTypes.ERROR_SIGN_OUT:
+      return {
+        ...state,
+        AuthError:action.payload
       };
 
     default:
