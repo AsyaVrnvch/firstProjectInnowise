@@ -11,7 +11,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SignInSchema } from "./SignInSchema";
 
-function SignInForm() {
+const SignInForm: React.FC = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -23,7 +23,7 @@ function SignInForm() {
     resolver: yupResolver(SignInSchema)
   });
 
-  const onSubmit = ( data ) => {
+  const onSubmit = ( data: { email:string, password:string} ) => {
     dispatch(
         signingInAction({
           email: data.email,
@@ -44,7 +44,7 @@ function SignInForm() {
             render={({ 
               field: { onChange }
             })=>(
-              <Input type='text' onChange={onChange} placeholder="Email..."/>
+              <Input type="text" onChange={onChange} placeholder="Email..."/>
             )}
           />
         <Error>{errors.email ? errors.email.message : ''}</Error>

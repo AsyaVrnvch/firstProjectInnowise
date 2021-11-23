@@ -14,11 +14,11 @@ export const selectUsername = createSelector(
 );
 export const selectAuthError = createSelector(
   selectAuthState,
-  (state) => state.AuthError
+  (state) => state.authError
 );
 export const selectRegistrationInfo = createSelector(
   selectAuthState,
-  (state) => state.RegInfo
+  (state) => state.regInfo
 );
 export const selectEmail = createSelector(
   selectAuthState,

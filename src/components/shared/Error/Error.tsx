@@ -1,7 +1,11 @@
 import React from "react";
 import * as Styles from "./Error.styles";
 
-const Error: React.FC = (props) => {
+interface ErrorProps{
+
+}
+
+const Error: React.FC = (props: ErrorProps) => {
   return <Styles.ErrorContainer {...props} />;
 };
 

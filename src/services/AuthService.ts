@@ -1,22 +1,36 @@
-import firebase from "firebase/compat/app";
 import { users } from "../config/firebase";
-import "firebase/compat/auth";
+import fb from "../config/firebase";
 import { getDoc } from "firebase/firestore";
 
 export const signOut = () => {
-    return firebase.auth().signOut();
+    return fb.auth().signOut();
 };
 
 export const signIn = async (email: string, password: string) => {
-    firebase.auth().signInWithEmailAndPassword(email, password);
-    const docSnap = await getDoc(users.doc(email))
+    const userData = await fb.auth().signInWithEmailAndPassword(
+        email, 
+        password);
+    if(!userData) throw Error();
+    const uid = userData.user?.uid;
+    const docRef = await users.doc(uid);
+    if(!docRef) throw Error();
+    const snapshot = await getDoc(docRef);
+    const data = await snapshot.data();
     return {
+        uid,
         email,
-        username: docSnap.data()?.username
+        username:data?.username
     }
 };
 
-export const signUp = ( email: string, password: string, username: string ) => {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    users.doc(email).set({ email, username })
+export const signUp = async ( 
+    email: string, 
+    password: string, 
+    username: string ) => {
+    const userData = await fb.auth().createUserWithEmailAndPassword(
+        email, 
+        password);
+    if(!userData) throw Error();
+    const uid = userData?.user?.uid;
+    users.doc(uid).set({ uid, email, username }); 
 }

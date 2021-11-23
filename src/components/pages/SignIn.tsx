@@ -1,6 +1,6 @@
-import SignInForm from "../modals/SignInForm/SignInForm";
+import SignInForm from "../shared/SignInForm/SignInForm";
 
-function SignIn() {
+const SignIn: React.FC = () => {
   return(
     <SignInForm/>
   )

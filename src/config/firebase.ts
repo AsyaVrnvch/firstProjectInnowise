@@ -1,5 +1,5 @@
 import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
+import "firebase/auth";
 import "firebase/compat/firestore";
 
 firebase.initializeApp({
@@ -12,8 +12,10 @@ firebase.initializeApp({
   measurementId: "G-JW2Q5E4KMN"
 });
 
-const db = firebase.firestore();
+const fb = firebase;
+
+export const db = firebase.firestore();
 
 export const users = db.collection("users");
 
-export default db
+export default fb

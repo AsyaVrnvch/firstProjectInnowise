@@ -2,8 +2,8 @@ import { AnyAction } from "redux";
 import { AuthActionTypes } from "../actions/auth";
 
 const initialState = {
-  RegInfo: "",
-  AuthError: "",
+  regInfo: "",
+  authError: "",
   isAuth: false,
   currentUser: {
     email: "",
@@ -12,8 +12,8 @@ const initialState = {
 };
 
 export interface State {
-  RegInfo: string;
-  AuthError: string;
+  regInfo: string;
+  authError: string;
   isAuth: boolean;
   currentUser: {
     email: string;
@@ -32,8 +32,8 @@ export default function authState(
     case AuthActionTypes.SUCCESS_SIGN_UP:
       return {
         ...state,
-        RegInfo: "Пользователь успешно зарегистрирован",
-        AuthError: "",
+        regInfo: "Пользователь успешно зарегистрирован",
+        authError: "",
         currentUser: {
           email: "",
           username: "",
@@ -44,8 +44,8 @@ export default function authState(
     case AuthActionTypes.ERROR_SIGN_UP:
       return {
         ...state,
-        RegInfo: action.payload.error.message,
-        AuthError: "",
+        regInfo: action.payload.error.message,
+        authError: "",
           currentUser: {
             email: "",
             username: "",
@@ -60,8 +60,8 @@ export default function authState(
       return {
         ...state,
         isAuth: true,
-        AuthError: "",
-        RegInfo: "",
+        authError: "",
+        regInfo: "",
         currentUser: action.payload
       };
 
@@ -73,8 +73,8 @@ export default function authState(
           email: "",
           username: "",
         },
-        RegInfo: "",
-        AuthError: action.payload.error,
+        regInfo: "",
+        authError: action.payload.error,
       };
 
     case AuthActionTypes.SIGNING_OUT:
@@ -85,8 +85,8 @@ export default function authState(
     case AuthActionTypes.SUCCESS_SIGN_OUT:
       return {
         ...state,
-        RegInfo: "",
-        AuthError: "",
+        regInfo: "",
+        authError: "",
         isAuth: false,
         currentUser: {
           email: "",
@@ -97,7 +97,7 @@ export default function authState(
     case AuthActionTypes.ERROR_SIGN_OUT:
       return {
         ...state,
-        AuthError:action.payload
+        authError:action.payload
       };
 
     default:

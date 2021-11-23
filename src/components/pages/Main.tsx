@@ -5,7 +5,7 @@ import { signingOutAction } from "../../redux/actions/auth";
 import { useHistory } from "react-router-dom";
 import { selectUsername } from "../../redux/selectors/auth";
 
-function Main() {
+const Main: React.FC = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();

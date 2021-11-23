@@ -1,7 +1,11 @@
 import React from "react";
 import * as Styles from "./Label.Styles";
 
-const Label: React.FC = (props) => {
+interface LabelProps extends React.HTMLAttributes<HTMLLabelElement>{
+
+}
+
+const Label: React.FC<LabelProps> = (props) => {
   return <Styles.LabelContainer {...props} />;
 };
 

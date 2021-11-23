@@ -1,6 +1,6 @@
-import SignUpForm from "../modals/SignUpForm/SignUpForm";
+import SignUpForm from "../shared/SignUpForm/SignUpForm";
 
-function SignUp() {
+const SignUp: React.FC = () => {
 
   return(
     <SignUpForm/>

@@ -12,7 +12,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SignUpSchema } from "./SignUpSchema";
 
-function SignUpForm() {
+const SignUpForm: React.FC = () => {
   const regInfo = useSelector(selectRegistrationInfo);
 
   const dispatch = useDispatch();
@@ -28,7 +28,12 @@ function SignUpForm() {
     resolver: yupResolver(SignUpSchema)
   });
 
-  const onSubmit = ( data ) => {
+  const onSubmit = ( data: {
+    email:string,
+    password:string,
+    repeatPassword:string,
+    username:string
+  } ) => {
     dispatch(
       signingUpAction({
         email: data.email,
@@ -50,7 +55,7 @@ function SignUpForm() {
             render={({ 
               field: { onChange }
             })=>(
-              <Input type='text' onChange={onChange} placeholder="Email..."/>
+              <Input type="text" onChange={onChange} placeholder="Email..."/>
             )}
           />
           <Error>{errors.email?.message}</Error>
@@ -61,7 +66,7 @@ function SignUpForm() {
             render={({ 
               field: { onChange }
             })=>(
-              <Input type='password' onChange={onChange} placeholder="Password..."/>
+              <Input type="password" onChange={onChange} placeholder="Password..."/>
             )}
           />
           <Error>{errors.password?.message}</Error>

@@ -15,10 +15,8 @@ export function* signOutWorker( action: AnyAction ) {
 
 export function* signInWorker( action: AnyAction ) {
     try{
-        let data = yield call(
-            AuthServce.signIn,
-            action.payload.email, 
-            action.payload.password);
+        const { email, password } = action.payload;
+        let data = yield call( AuthServce.signIn, email, password );
         yield put(AuthActions.successSignInAction(data));
     }
     catch(e){
@@ -28,15 +26,11 @@ export function* signInWorker( action: AnyAction ) {
 
 export function* signUpWorker( action: AnyAction ) {
     try{
-        yield call(
-            AuthServce.signUp,
-            action.payload.email, 
-            action.payload.password,
-            action.payload.username);
+        const { email, password, username } = action.payload;
+        yield call(AuthServce.signUp,email,password,username);
         yield put(AuthActions.successSignUpAction());
     }
     catch(e){
-        console.log(e)
         yield put(AuthActions.errorSignUpAction({ error: e }));
     }
 }
