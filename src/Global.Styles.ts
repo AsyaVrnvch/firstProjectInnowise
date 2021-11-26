@@ -1,4 +1,6 @@
+// import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
 import { createGlobalStyle } from "styled-components";
+
 
 export const GlobalStyle = createGlobalStyle`
   body{

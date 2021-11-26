@@ -3,6 +3,16 @@ import { AnyAction } from "redux";
 import * as AuthServce from "../../services/AuthService";
 import * as AuthActions from "../actions/auth";
 
+export function* checkAuthWorker( action: AnyAction ) {
+    try{
+        let data = yield call(AuthServce.getCurrentUser,action.payload);
+        yield put(AuthActions.successSignInAction(data));
+    }
+    catch(e){
+        yield put(AuthActions.successSignOutAction());
+    }
+}
+
 export function* signOutWorker( action: AnyAction ) {
     try{
         yield call(AuthServce.signOut);

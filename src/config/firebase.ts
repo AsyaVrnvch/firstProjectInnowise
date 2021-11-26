@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/auth";
 import "firebase/compat/firestore";
+import 'firebase/compat/storage';
 
 firebase.initializeApp({
   apiKey: "AIzaSyCh28yppDN8wCs6CcZYRR9bH3ki-fD_TEo",
@@ -13,9 +14,10 @@ firebase.initializeApp({
 });
 
 const fb = firebase;
+const firestore = firebase.firestore();
+const firestorage = firebase.storage();
 
-export const db = firebase.firestore();
+const users = firestore.collection("users");
+const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
-export const users = db.collection("users");
-
-export default fb
+export { fb, firestore, firestorage, users, timestamp }

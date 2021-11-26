@@ -8,6 +8,7 @@ const initialState = {
   currentUser: {
     email: "",
     username: "",
+    imageUrl:"",
   },
 };
 
@@ -18,6 +19,7 @@ export interface State {
   currentUser: {
     email: string;
     username: string;
+    imageUrl: string;
   };
 }
 
@@ -26,6 +28,9 @@ export default function authState(
   action: AnyAction
 ) {
   switch (action.type) {
+    case AuthActionTypes.CHECKING_AUTH:
+      return state;
+
     case AuthActionTypes.SIGNING_UP:
       return state;
 
@@ -37,6 +42,7 @@ export default function authState(
         currentUser: {
           email: "",
           username: "",
+          imageUrl:""
         },
         isAuth: false,
       };
@@ -49,6 +55,7 @@ export default function authState(
           currentUser: {
             email: "",
             username: "",
+            imageUrl:""
           },
         isAuth: false,
       };
@@ -72,6 +79,7 @@ export default function authState(
         currentUser: {
           email: "",
           username: "",
+          imageUrl:""
         },
         regInfo: "",
         authError: action.payload.error,
@@ -91,6 +99,7 @@ export default function authState(
         currentUser: {
           email: "",
           username: "",
+          imageUrl:""
         },
       };
 

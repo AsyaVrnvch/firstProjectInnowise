@@ -1,6 +1,28 @@
-import { users } from "../config/firebase";
-import fb from "../config/firebase";
+import { fb, users } from "../config/firebase";
 import { getDoc } from "firebase/firestore";
+
+export const getCurrentUser = async (uid:string) => {
+    const docRef = await users.doc(uid);
+    if(!docRef) throw Error();
+    const snapshot = await getDoc(docRef);
+    const data = await snapshot.data();
+    return {
+        uid,
+        email:data?.email,
+        username:data?.username,
+        imageUrl:data?.imageUrl
+    }
+}
+
+export const currentUID = async () => {
+    let uid = "";
+    await fb.auth().onAuthStateChanged(user => {
+      if(user){
+        uid = user?.uid;
+      }
+    })
+    return uid;
+}
 
 export const signOut = () => {
     return fb.auth().signOut();
@@ -11,16 +33,9 @@ export const signIn = async (email: string, password: string) => {
         email, 
         password);
     if(!userData) throw Error();
-    const uid = userData.user?.uid;
-    const docRef = await users.doc(uid);
-    if(!docRef) throw Error();
-    const snapshot = await getDoc(docRef);
-    const data = await snapshot.data();
-    return {
-        uid,
-        email,
-        username:data?.username
-    }
+    const uid = userData.user?.uid || '';
+    const data = await getCurrentUser(uid);
+    return data;
 };
 
 export const signUp = async ( 
@@ -32,5 +47,7 @@ export const signUp = async (
         password);
     if(!userData) throw Error();
     const uid = userData?.user?.uid;
-    users.doc(uid).set({ uid, email, username }); 
+    const imageUrl = "https://w7.pngwing.com/pngs/906/222/png-transparent-computer-icons-user-profile-avatar-french-people-computer-network-heroes-black.png";
+    users.doc(uid).set({ uid, email, username, imageUrl }); 
+    users.doc(uid).collection("images");
 }
