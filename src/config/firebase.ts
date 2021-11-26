@@ -1,9 +1,9 @@
 import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
+import "firebase/auth";
 import "firebase/compat/firestore";
-import "firebase/compat/database";
+import 'firebase/compat/storage';
 
-const fb = firebase.initializeApp({
+firebase.initializeApp({
   apiKey: "AIzaSyCh28yppDN8wCs6CcZYRR9bH3ki-fD_TEo",
   authDomain: "first-project-innowise.firebaseapp.com",
   projectId: "first-project-innowise",
@@ -13,4 +13,11 @@ const fb = firebase.initializeApp({
   measurementId: "G-JW2Q5E4KMN"
 });
 
-export default fb
+const fb = firebase;
+const firestore = firebase.firestore();
+const firestorage = firebase.storage();
+
+const users = firestore.collection("users");
+const timestamp = firebase.firestore.FieldValue.serverTimestamp;
+
+export { fb, firestore, firestorage, users, timestamp }

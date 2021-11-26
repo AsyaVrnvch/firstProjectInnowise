@@ -2,22 +2,24 @@ import { AnyAction } from "redux";
 import { AuthActionTypes } from "../actions/auth";
 
 const initialState = {
-  RegInfo: "",
-  AuthError: "",
+  regInfo: "",
+  authError: "",
   isAuth: false,
   currentUser: {
     email: "",
     username: "",
+    imageUrl:"",
   },
 };
 
 export interface State {
-  RegInfo: string;
-  AuthError: string;
+  regInfo: string;
+  authError: string;
   isAuth: boolean;
   currentUser: {
     email: string;
     username: string;
+    imageUrl: string;
   };
 }
 
@@ -26,17 +28,21 @@ export default function authState(
   action: AnyAction
 ) {
   switch (action.type) {
+    case AuthActionTypes.CHECKING_AUTH:
+      return state;
+
     case AuthActionTypes.SIGNING_UP:
       return state;
 
     case AuthActionTypes.SUCCESS_SIGN_UP:
       return {
         ...state,
-        RegInfo: "Пользователь успешно зарегистрирован",
-        AuthError: "",
+        regInfo: "Пользователь успешно зарегистрирован",
+        authError: "",
         currentUser: {
           email: "",
           username: "",
+          imageUrl:""
         },
         isAuth: false,
       };
@@ -44,12 +50,13 @@ export default function authState(
     case AuthActionTypes.ERROR_SIGN_UP:
       return {
         ...state,
-        RegInfo: action.payload.error,
-        AuthError: "",
-        currentUser: {
-          email: "",
-          username: "",
-        },
+        regInfo: action.payload.error.message,
+        authError: "",
+          currentUser: {
+            email: "",
+            username: "",
+            imageUrl:""
+          },
         isAuth: false,
       };
 
@@ -60,9 +67,9 @@ export default function authState(
       return {
         ...state,
         isAuth: true,
-        AuthError: "",
-        RegInfo: "",
-        currentUser: action.payload,
+        authError: "",
+        regInfo: "",
+        currentUser: action.payload
       };
 
     case AuthActionTypes.ERROR_SIGN_IN:
@@ -72,21 +79,34 @@ export default function authState(
         currentUser: {
           email: "",
           username: "",
+          imageUrl:""
         },
-        RegInfo: "",
-        AuthError: action.payload.error,
+        regInfo: "",
+        authError: action.payload.error,
       };
 
-    case AuthActionTypes.LOG_OUT:
+    case AuthActionTypes.SIGNING_OUT:
+      return {
+        ...state
+      };
+
+    case AuthActionTypes.SUCCESS_SIGN_OUT:
       return {
         ...state,
-        RegInfo: "",
-        AuthError: "",
+        regInfo: "",
+        authError: "",
         isAuth: false,
         currentUser: {
           email: "",
           username: "",
+          imageUrl:""
         },
+      };
+
+    case AuthActionTypes.ERROR_SIGN_OUT:
+      return {
+        ...state,
+        authError:action.payload
       };
 
     default:

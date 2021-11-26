@@ -1,9 +1,13 @@
 import { Route } from "react-router";
-import { Redirect } from "react-router";
+import { Redirect, RouteProps } from "react-router";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../../redux/selectors/auth";
 
-function ProtectedRoute({ path, Component, ...rest }) {
+interface ProtectedRouteProps extends RouteProps{
+  Component: React.ComponentType<RouteProps>
+}
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ path, Component, ...rest }) => {
   const isAuth = useSelector(selectIsAuth);
 
   return (

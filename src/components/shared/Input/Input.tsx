@@ -1,12 +1,8 @@
 import React from "react";
 import * as Styles from "./Input.Styles";
 
-interface InputProps {
-  type: string;
-  name?: string;
-  value?: string;
-  onChange?: (event) => void;
-  placeholder?: string;
+interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
+  type:string,
 }
 
 const Input: React.FC<InputProps> = (props) => {
