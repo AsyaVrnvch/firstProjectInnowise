@@ -23,4 +23,5 @@ export const NavbarLinkContainer = styled.button`
 
 export const NavbarContainer = styled.div`
   border-bottom: 3px solid #98efc0;
+  margin-bottom: 5px;
 `;

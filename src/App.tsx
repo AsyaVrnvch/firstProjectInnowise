@@ -10,15 +10,10 @@ import { useEffect } from "react";
 import { checkingAuth } from "./redux/actions/auth";
 import { useDispatch } from "react-redux";
 import { fb } from "./config/firebase";
-import { Redirect } from "react-router";
-import { useSelector } from "react-redux";
-import { selectIsAuth } from "./redux/selectors/auth";
 
 function App() {
   const dispatch = useDispatch();
-
-  const isAuth = useSelector(selectIsAuth);
-
+  
   useEffect(() => {
     fb.auth().onAuthStateChanged(user => {
       if(user){
@@ -27,10 +22,6 @@ function App() {
       }
     })
   })
-
-  if(isAuth) return(
-    <Redirect to={AppRoutes.Main}/>
-  )
 
   return (
     <div>

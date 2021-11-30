@@ -6,7 +6,6 @@ import ImageGrid from "../shared/ImageGrid/ImageGrid";
 
 const Main: React.FC = () => {
   const username = useSelector(selectUsername);
-
   return (
     <div>
       <h3>MainPage</h3>

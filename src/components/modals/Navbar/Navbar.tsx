@@ -40,6 +40,9 @@ const Navbar: React.FC = () => {
         <Link to={AppRoutes.Main}>Main page</Link>
       </Styles.NavbarLinkContainer>
       <Styles.NavbarLinkContainer>
+        <Link to={AppRoutes.CanvasPage}>Canvas page</Link>
+      </Styles.NavbarLinkContainer>
+      <Styles.NavbarLinkContainer>
         <Link to={AppRoutes.SignIn} onClick={signOut}>Log out</Link>
       </Styles.NavbarLinkContainer>
     </Styles.NavbarContainer>
