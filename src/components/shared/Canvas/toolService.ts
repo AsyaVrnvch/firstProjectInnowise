@@ -1,51 +1,45 @@
-export const mouseDownHandlerBrush = (ctx:CanvasRenderingContext2D | null, e) => {
-    ctx?.beginPath();
-    console.log('mouseDownHandlerBrush',e.pageX - e.target.offsetLeft, 
-      e.pageY - e.target.offsetTop);
-    ctx?.moveTo(
-      e.pageX - e.target.offsetLeft, 
-      e.pageY - e.target.offsetTop
-    );
-}
-
-export const mouseMoveHandlerBrush = (ctx:CanvasRenderingContext2D | null, e) => {
+//BRUSH---------------------
+export const mouseMoveHandlerBrush = (
+    ctx:CanvasRenderingContext2D | null, 
+    e, 
+    color: string,
+    widthLine: number
+) => {
     drawBrush(
         ctx || null,
         e.pageX - e.target.offsetLeft, 
-        e.pageY - e.target.offsetTop
+        e.pageY - e.target.offsetTop,
+        color,
+        widthLine
     );
 }
 
-export const mouseUpHandlerBrush = (ctx:CanvasRenderingContext2D | null, e) => {
-    ctx?.closePath();
-}
-
-export const drawBrush = (
+const drawBrush = (
     ctx:CanvasRenderingContext2D | null, 
     x: number, 
-    y: number) => {
-        ctx?.lineTo(x,y);
-        ctx?.stroke();
-}
-
-export const mouseDownHandlerRectangle = (
-    ctx:CanvasRenderingContext2D | null, 
-    e
+    y: number,
+    color: string,
+    widthLine: number
 ) => {
-    ctx?.beginPath();
-    let startX = e.pageX - e.target.offsetLeft;
-    let startY = e.pageY - e.target.offsetTop;
-    return { startX, startY }
+    ctx?.lineTo(x,y);
+    if(ctx){
+        ctx.strokeStyle = color;
+        ctx.lineWidth = widthLine;
+    }
+    ctx?.stroke();
 }
 
+//RECTANGLE---------------------
 export const mouseMoveHandlerRectangle = (
     ctx:CanvasRenderingContext2D | null, 
     e, 
-    startX:number, 
-    startY:number,
+    startX: number, 
+    startY: number,
     canvasWidth: number, 
     canvasHeight:number,
-    dataUrl: string
+    dataUrl: string,
+    color: string,
+    widthLine: number
 ) => {
     let currentX = e.pageX - e.target.offsetLeft;
     let currentY = e.pageY - e.target.offsetTop;
@@ -55,26 +49,23 @@ export const mouseMoveHandlerRectangle = (
         ctx || null,
         startX, startY, width, height,
         canvasWidth, canvasHeight,
-        dataUrl
+        dataUrl,
+        color, 
+        widthLine
     );
 }
 
-export const mouseUpHandlerRectangle = (
-    ctx:CanvasRenderingContext2D | null, 
-    e
-) => {
-    ctx?.closePath();
-}
-
-export const drawRectangle = (
+const drawRectangle = (
     ctx:CanvasRenderingContext2D | null, 
     x: number, 
     y: number, 
-    w:number, 
-    h:number,
+    width: number, 
+    height: number,
     canvasWidth: number, 
-    canvasHeight:number,
-    dataUrl: string
+    canvasHeight: number,
+    dataUrl: string,
+    color: string,
+    widthLine: number
 ) => {
         const img = new Image();
         img.src = dataUrl;
@@ -82,8 +73,115 @@ export const drawRectangle = (
             ctx?.clearRect(0, 0, canvasWidth, canvasHeight);
             ctx?.drawImage(img, 0, 0, canvasWidth, canvasHeight);
             ctx?.beginPath();
-            ctx?.rect(x,y,w,h);
+            if(ctx){
+                ctx.strokeStyle = color;
+                ctx.lineWidth = widthLine;
+            }
+            ctx?.rect(x,y,width,height);
             ctx?.stroke();
         }
         
+}
+
+//CIRCLE---------------------
+export const mouseMoveHandlerCircle = (
+    ctx:CanvasRenderingContext2D | null, 
+    e, 
+    startX: number, 
+    startY: number,
+    canvasWidth: number, 
+    canvasHeight:number,
+    dataUrl: string,
+    color: string,
+    widthLine: number
+) => {
+    let currentX = e.pageX - e.target.offsetLeft;
+    let currentY = e.pageY - e.target.offsetTop;
+    let width = currentX - startX;
+    let height = currentY - startY;
+    let radius = Math.sqrt(width**2+height**2)
+    drawCircle(
+        ctx || null,
+        startX, startY, radius,
+        canvasWidth, canvasHeight,
+        dataUrl,
+        color, 
+        widthLine
+    );
+}
+
+const drawCircle = (
+    ctx:CanvasRenderingContext2D | null, 
+    x: number, 
+    y: number, 
+    radius: number,
+    canvasWidth: number, 
+    canvasHeight: number,
+    dataUrl: string,
+    color: string,
+    widthLine: number
+) => {
+    const img = new Image();
+    img.src = dataUrl;
+    img.onload = () => {
+        ctx?.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx?.drawImage(img, 0, 0, canvasWidth, canvasHeight);
+        ctx?.beginPath();
+        if(ctx){
+            ctx.strokeStyle = color;
+            ctx.lineWidth = widthLine;
+        }
+        ctx?.arc(x, y, radius, 0, 2*Math.PI);
+        ctx?.stroke();
+    }
+}
+
+//LINE---------------------
+export const mouseMoveHandlerLine = (
+    ctx:CanvasRenderingContext2D | null, 
+    e,
+    startX: number, 
+    startY: number,
+    canvasWidth: number, 
+    canvasHeight: number,
+    dataUrl: string,
+    color: string,
+    widthLine: number
+) => {
+    let x = e.pageX-e.target.offsetLeft;
+    let y = e.pageY-e.target.offsetTop;
+    drawLine(
+        ctx || null, x, y,
+        startX, startY,
+        canvasWidth, canvasHeight,
+        dataUrl, color, widthLine
+    );
+}
+
+const drawLine = (
+    ctx:CanvasRenderingContext2D | null, 
+    x: number, 
+    y: number,
+    startX: number, 
+    startY: number, 
+    canvasWidth: number, 
+    canvasHeight: number,
+    dataUrl: string,
+    color: string,
+    widthLine: number
+) => {
+    const img = new Image();
+    img.src = dataUrl;
+    img.onload = () => {
+        ctx?.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx?.drawImage(img, 0, 0, canvasWidth, canvasHeight);
+        ctx?.beginPath();
+        if(ctx){
+            ctx.strokeStyle = color;
+            ctx.lineWidth = widthLine;
+        }
+        ctx?.moveTo(startX, startY);
+        ctx?.lineTo(x, y);
+        ctx?.stroke();
+    }
 }

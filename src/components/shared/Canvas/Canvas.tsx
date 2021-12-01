@@ -2,58 +2,92 @@ import React from "react";
 import * as Styles from "./Canvas.Styles";
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectTool } from "../../../redux/selectors/canvas";
+import * as canvasSelector from "../../../redux/selectors/canvas";
 import * as toolService from "./toolService";
+
+interface IStartPos{
+  x: number,
+  y: number
+}
 
 const Canvas: React.FC = () => {
   const canvasRef = useRef <HTMLCanvasElement>(null);
-  const [mouse, setMouse] = useState(false);
   const ctx: CanvasRenderingContext2D | null = canvasRef.current ? canvasRef.current.getContext('2d') : null;
-  const tool = useSelector(selectTool);
-  const [dataUrl, setDataUrl] = useState('');
-  const [startPos, setStartPos] = useState({ x:0, y:0 });
   const canvasSize = {
     w:500,
     h:500
   }
 
-  const mouseDownHandler = (e) => {
+  const [mouse, setMouse] = useState<boolean>(false);
+  const [dataUrl, setDataUrl] = useState<string>('');
+  const [startPos, setStartPos] = useState<IStartPos>({ x:0, y:0 });
+
+  const tool = useSelector(canvasSelector.selectTool);
+  const color = useSelector(canvasSelector.selectColor);
+  const width = useSelector(canvasSelector.selectWidth);
+
+  const mouseDownHandler = (event: React.MouseEvent<HTMLCanvasElement>) => {
     setMouse(true);
-    switch(tool){
-      case 'brush':
-        toolService.mouseDownHandlerBrush(ctx, e);
-        break;
-
-      case 'rectangle':
-        let url = canvasRef.current ? canvasRef.current?.toDataURL() : '';
-        setDataUrl(url);
-        let pos = toolService.mouseDownHandlerRectangle(ctx, e);
-        setStartPos({
-          x:pos.startX,
-          y:pos.startY
-        })
-        break;
-
-      default: break;
-    }
+    let url = canvasRef.current ? canvasRef.current?.toDataURL() : '';
+    setDataUrl(url);
+    ctx?.beginPath();
+    let startX = event.pageX - event.target.offsetLeft;
+    let startY = event.pageY - event.target.offsetTop;
+    ctx?.moveTo(startX, startY);
+    setStartPos({
+      x:startX,
+      y:startY
+    })
   }
 
-  const mouseMoveHandler = (e) => {
-    if(mouse){
+  const mouseMoveHandler = (event) => {
+    if(mouse){ 
       switch(tool){
+        case 'eraser':
         case 'brush':
-          toolService.mouseMoveHandlerBrush(ctx, e)
+          toolService.mouseMoveHandlerBrush(ctx, event, color, width)
           break;
 
         case 'rectangle':
           toolService.mouseMoveHandlerRectangle(
             ctx, 
-            e, 
+            event, 
             startPos.x, 
             startPos.y, 
             canvasSize.w,
             canvasSize.h,
-            dataUrl)
+            dataUrl,
+            color, 
+            width
+          )
+          break;
+
+        case 'circle':
+          toolService.mouseMoveHandlerCircle(
+            ctx, 
+            event, 
+            startPos.x, 
+            startPos.y, 
+            canvasSize.w,
+            canvasSize.h,
+            dataUrl,
+            color, 
+            width
+          )
+          break;
+
+        case 'line':
+          toolService.mouseMoveHandlerLine(
+            ctx, 
+            event, 
+            startPos.x, 
+            startPos.y, 
+            canvasSize.w,
+            canvasSize.h,
+            dataUrl,
+            color, 
+            width
+          )
           break;
 
         default: break;
@@ -61,19 +95,9 @@ const Canvas: React.FC = () => {
     }
   }
 
-  const mouseUpHandler = (e) => {
+  const mouseUpHandler = () => {
     setMouse(false);
-    switch(tool){
-        case 'brush':
-          toolService.mouseUpHandlerBrush(ctx, e)
-          break;
-
-        case 'rectangle':
-          toolService.mouseUpHandlerRectangle(ctx, e);
-          break;
-
-        default: break;
-      }
+    ctx?.closePath();
   }
 
   return (

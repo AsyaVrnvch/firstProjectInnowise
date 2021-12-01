@@ -8,3 +8,11 @@ const selectCanvasState = (state: AppState):canvas.CanvasState => state.canvasSt
 export const selectTool = createSelector(
   selectCanvasState, 
   (state) => state.tool);
+
+  export const selectColor = createSelector(
+  selectCanvasState, 
+  (state) => state.color);
+
+  export const selectWidth = createSelector(
+  selectCanvasState, 
+  (state) => state.width);
