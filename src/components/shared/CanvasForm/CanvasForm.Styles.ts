@@ -5,5 +5,5 @@ export const CanvasFormContainer = styled.div`
     margin: auto;
     padding: 0px;
     width: 500px;
-    height: 500px;
+    height: 580px;
 `;

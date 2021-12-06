@@ -1,15 +1,15 @@
 import { put, call } from 'redux-saga/effects';
 import { AnyAction } from "redux";
 import * as ImagesActionTypes from "../actions/images";
-import * as ImageService from "../../services/ImageService";
+import * as ImagesService from "../../services/ImageService";
 
-export function* loadingImageWorker( action: AnyAction ) {
+export function* loadingImagesWorker( action: AnyAction ) {
     try{
-        yield call(ImageService.loadImage,action.payload);
-        yield put(ImagesActionTypes.successLoadImage());
+        const images = yield call(ImagesService.loadImages);
+        yield put(ImagesActionTypes.successLoadImages(images));
     }
     catch(e){
         console.log(e)
-        yield put(ImagesActionTypes.errorLoadImage(e));
+        yield put(ImagesActionTypes.errorLoadImages(e));
     }
 }

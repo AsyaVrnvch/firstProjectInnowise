@@ -1,9 +1,10 @@
 import React from "react";
 import * as Styles from "./Canvas.Styles";
-import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useRef, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import * as canvasSelector from "../../../redux/selectors/canvas";
 import * as toolService from "./toolService";
+import { savingImage } from "../../../redux/actions/canvas";
 
 interface IStartPos{
   x: number,
@@ -11,6 +12,8 @@ interface IStartPos{
 }
 
 const Canvas: React.FC = () => {
+  const dispatch = useDispatch();
+
   const canvasRef = useRef <HTMLCanvasElement>(null);
   const ctx: CanvasRenderingContext2D | null = canvasRef.current ? canvasRef.current.getContext('2d') : null;
   const canvasSize = {
@@ -25,10 +28,19 @@ const Canvas: React.FC = () => {
   const tool = useSelector(canvasSelector.selectTool);
   const color = useSelector(canvasSelector.selectColor);
   const width = useSelector(canvasSelector.selectWidth);
+  const isSaving = useSelector(canvasSelector.selectIsSaving);
 
-  const mouseDownHandler = (event: React.MouseEvent<HTMLCanvasElement>) => {
+  useEffect(() => {
+    if(isSaving){
+      canvasRef.current?.toBlob( blob =>{
+        dispatch(savingImage(blob))
+      })
+    }
+  })
+
+  const mouseDownHandler = (event) => {
     setMouse(true);
-    let url = canvasRef.current ? canvasRef.current?.toDataURL() : '';
+    let url = canvasRef.current ? canvasRef.current?.toDataURL("image/png") : '';
     setDataUrl(url);
     ctx?.beginPath();
     let startX = event.pageX - event.target.offsetLeft;
@@ -44,6 +56,9 @@ const Canvas: React.FC = () => {
     if(mouse){ 
       switch(tool){
         case 'eraser':
+          toolService.mouseMoveHandlerBrush(ctx, event, 'white', 5)
+          break;
+
         case 'brush':
           toolService.mouseMoveHandlerBrush(ctx, event, color, width)
           break;

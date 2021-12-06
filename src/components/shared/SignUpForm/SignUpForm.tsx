@@ -6,7 +6,7 @@ import Label from "../../shared/Label/Label";
 import Error from "../../shared/Error/Error";
 import { useSelector, useDispatch } from "react-redux";
 import { signingUpAction } from "../../../redux/actions/auth";
-import InfoModal from "../../shared/InfoModal/InfoModal";
+import InfoModal from "../../modals/InfoModal/InfoModal";
 import { selectRegistrationInfo } from "../../../redux/selectors/auth";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

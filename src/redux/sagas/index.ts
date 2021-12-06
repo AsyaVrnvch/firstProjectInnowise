@@ -1,8 +1,10 @@
 import { takeEvery, all } from "redux-saga/effects";
 import * as authSaga from './authSaga';
-import * as imageSaga from './imageSaga';
+import * as imagesSaga from './imageSaga';
+import * as canvasSaga from './canvasSaga';
 import { AuthActionTypes } from "../actions/auth";
 import { ImagesActionTypes } from "../actions/images";
+import { CanvasActionTypes } from "../actions/canvas";
 
 export default function* rootSaga() {
   yield all([
@@ -10,6 +12,7 @@ export default function* rootSaga() {
     takeEvery(AuthActionTypes.SIGNING_IN, authSaga.signInWorker),
     takeEvery(AuthActionTypes.SIGNING_UP, authSaga.signUpWorker),
     takeEvery(AuthActionTypes.CHECKING_AUTH, authSaga.checkAuthWorker),
-    takeEvery(ImagesActionTypes.LOADING_IMAGE,imageSaga.loadingImageWorker),
+    takeEvery(ImagesActionTypes.LOADING_IMAGES,imagesSaga.loadingImagesWorker),
+    takeEvery(CanvasActionTypes.SAVING_IMAGE,canvasSaga.savingCanvasImage),
   ]);
 }
