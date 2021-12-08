@@ -7,8 +7,6 @@ export enum CanvasActionTypes {
   CHANGE_COLOR = "[Canvas] CHANGE_COLOR",
 
   CHANGE_IMAGE = "[Canvas] CHANGE_IMAGE",
-  // CANVAS_UNDO = "[Canvas] CANVAS_UNDO",
-  // CANVAS_REDO = "[Canvas] CANVAS_REDO",
 
   SAVE_REQUEST = "[Canvas] SAVE_REQUEST",
   SAVING_IMAGE = "[Canvas] SAVING_IMAGE",
@@ -35,21 +33,6 @@ export const changeImage = createAction(
   CanvasActionTypes.CHANGE_IMAGE,
   (payload: { url:string }) => payload
 );
-
-// export const pushUndo = createAction(
-//   CanvasActionTypes.PUSH_UNDO,
-//   (payload: { url:string }) => payload
-// );
-
-// export const canvasUndo = createAction(
-//   CanvasActionTypes.CANVAS_UNDO,
-//   (payload: {}) => payload
-// );
-
-// export const canvasRedo = createAction(
-//   CanvasActionTypes.CANVAS_REDO,
-//   (payload: {}) => payload
-// );
 
 export const saveRequest = createAction(
   CanvasActionTypes.SAVE_REQUEST

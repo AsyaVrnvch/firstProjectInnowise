@@ -10,13 +10,13 @@ interface ImageGridProps{
 }
 
 const ImageGrid: React.FC<ImageGridProps> = ({ allImages }) => {
-    const [selectedImage, setSelectedImage] = useState<string>('');
+    const [selectedImage, setSelectedImage] = useState<Image|null>();
     return(
         <Styles.ImageGridContainer>
             {allImages && allImages.map(image => (
                 <div key={image.id}>
                     <UserImage data={image} 
-                        onClick={() => setSelectedImage(image.url) }
+                        onClick={() => setSelectedImage(image) }
                     />
                 </div>
             ))}

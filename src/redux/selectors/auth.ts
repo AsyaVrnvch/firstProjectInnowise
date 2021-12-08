@@ -8,19 +8,28 @@ const selectAuthState = (state: AppState):auth.State => state.authState;
 export const selectIsAuth = createSelector(
   selectAuthState, 
   (state) => state.isAuth);
+
 export const selectUsername = createSelector(
   selectAuthState,
   (state) => state.currentUser.username
 );
+
 export const selectAuthError = createSelector(
   selectAuthState,
   (state) => state.authError
 );
+
 export const selectRegistrationInfo = createSelector(
   selectAuthState,
   (state) => state.regInfo
 );
+
 export const selectEmail = createSelector(
   selectAuthState,
   (state) => state.currentUser.email
+);
+
+export const selectAvatar = createSelector(
+  selectAuthState,
+  (state) => state.currentUser.imageUrl
 );

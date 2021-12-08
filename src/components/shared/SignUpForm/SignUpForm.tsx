@@ -94,11 +94,9 @@ const SignUpForm: React.FC = () => {
           <Error>{errors.username?.message}</Error>
           <Button>Sign up</Button>
         </Form>
-      {modalState ? (
+      {modalState &&
         <InfoModal title="Регистрация" content={regInfo} onClose={closeModal} />
-      ) : (
-        ""
-      )}
+      }
     </div>
   );
 }

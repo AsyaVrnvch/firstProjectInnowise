@@ -5,7 +5,6 @@ import Label from "../../shared/Label/Label";
 import Error from "../../shared/Error/Error";
 import { useSelector, useDispatch } from "react-redux";
 import { signingInAction } from "../../../redux/actions/auth";
-import { useHistory } from "react-router-dom";
 import { selectAuthError } from "../../../redux/selectors/auth";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,9 +12,6 @@ import { SignInSchema } from "./SignInSchema";
 
 const SignInForm: React.FC = () => {
   const dispatch = useDispatch();
-
-  const history = useHistory();
-
   const errorAuth = useSelector(selectAuthError);
 
   const { control, handleSubmit, formState: { errors } } = useForm({
@@ -30,7 +26,6 @@ const SignInForm: React.FC = () => {
           password: data.password,
         })
       );
-    history.replace("/main");
   }
 
   return (

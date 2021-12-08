@@ -1,14 +1,14 @@
 //BRUSH---------------------
 export const mouseMoveHandlerBrush = (
     ctx:CanvasRenderingContext2D | null, 
-    e, 
+    e: React.MouseEvent, 
     color: string,
     widthLine: number
 ) => {
     drawBrush(
         ctx || null,
-        e.pageX - e.target.offsetLeft, 
-        e.pageY - e.target.offsetTop,
+        e.pageX - (e.target as HTMLElement).offsetLeft, 
+        e.pageY - (e.target as HTMLElement).offsetTop,
         color,
         widthLine
     );
@@ -32,7 +32,7 @@ const drawBrush = (
 //RECTANGLE---------------------
 export const mouseMoveHandlerRectangle = (
     ctx:CanvasRenderingContext2D | null, 
-    e, 
+    e: React.MouseEvent,  
     startX: number, 
     startY: number,
     canvasWidth: number, 
@@ -41,8 +41,8 @@ export const mouseMoveHandlerRectangle = (
     color: string,
     widthLine: number
 ) => {
-    let currentX = e.pageX - e.target.offsetLeft;
-    let currentY = e.pageY - e.target.offsetTop;
+    let currentX = e.pageX - (e.target as HTMLElement).offsetLeft;
+    let currentY = e.pageY - (e.target as HTMLElement).offsetTop;
     let width = currentX - startX;
     let height = currentY - startY;
     drawRectangle(
@@ -86,7 +86,7 @@ const drawRectangle = (
 //CIRCLE---------------------
 export const mouseMoveHandlerCircle = (
     ctx:CanvasRenderingContext2D | null, 
-    e, 
+    e: React.MouseEvent,  
     startX: number, 
     startY: number,
     canvasWidth: number, 
@@ -95,8 +95,8 @@ export const mouseMoveHandlerCircle = (
     color: string,
     widthLine: number
 ) => {
-    let currentX = e.pageX - e.target.offsetLeft;
-    let currentY = e.pageY - e.target.offsetTop;
+    let currentX = e.pageX - (e.target as HTMLElement).offsetLeft;
+    let currentY = e.pageY - (e.target as HTMLElement).offsetTop;
     let width = currentX - startX;
     let height = currentY - startY;
     let radius = Math.sqrt(width**2+height**2)
@@ -139,7 +139,7 @@ const drawCircle = (
 //LINE---------------------
 export const mouseMoveHandlerLine = (
     ctx:CanvasRenderingContext2D | null, 
-    e,
+    e: React.MouseEvent, 
     startX: number, 
     startY: number,
     canvasWidth: number, 
@@ -148,8 +148,8 @@ export const mouseMoveHandlerLine = (
     color: string,
     widthLine: number
 ) => {
-    let x = e.pageX-e.target.offsetLeft;
-    let y = e.pageY-e.target.offsetTop;
+    let x = e.pageX - (e.target as HTMLElement).offsetLeft;
+    let y = e.pageY - (e.target as HTMLElement).offsetTop;
     drawLine(
         ctx || null, x, y,
         startX, startY,

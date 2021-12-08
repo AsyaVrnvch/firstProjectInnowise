@@ -1,21 +1,25 @@
 import * as Styles from "./ImageModal.Styles";
+import { Image } from "../../../redux/reducers/images"; 
 
 interface ImageModalProps {
-  selectedImage: string,
-  setSelectedImage: (value:string) => void
+  selectedImage: Image,
+  setSelectedImage: (value: Image|null) => void
 }
 
 const ImageModal: React.FC<ImageModalProps> = ({ selectedImage, setSelectedImage,...props }) => {
   
-  const handleClick = (event) => {
-    if(event.target.classList.contains('backdrop')){
-      setSelectedImage('');
+  const handleClick = (event: React.MouseEvent) => {
+    if((event.target as HTMLElement).classList.contains('backdrop')){
+      setSelectedImage(null);
     }
   }
   
   return (
     <Styles.ImageModalContainer className='backdrop' onClick={handleClick}>
-        <img src={selectedImage} alt="Loading..."/>
+        <div>
+          <img src={selectedImage.url} alt="Loading..."/>
+          <span>{selectedImage.createdAt.toLocaleString()}</span>
+        </div>
     </Styles.ImageModalContainer>
   );
 };

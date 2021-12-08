@@ -14,7 +14,12 @@ function TimeLine() {
   },[]);
 
   return (
-      <ImageGrid allImages={allImages}/>
+      <div>
+        <div>
+          <input type="text"/>
+        </div>
+        <ImageGrid allImages={allImages}/>
+      </div>
   );
 }
 

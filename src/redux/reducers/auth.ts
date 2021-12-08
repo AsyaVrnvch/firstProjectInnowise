@@ -1,5 +1,6 @@
 import { AnyAction } from "redux";
 import { AuthActionTypes } from "../actions/auth";
+import { ProfileActionTypes } from "../actions/profile";
 
 const initialState = {
   regInfo: "",
@@ -107,6 +108,25 @@ export default function authState(
       return {
         ...state,
         authError:action.payload
+      };
+
+    case ProfileActionTypes.LOADING_AVATAR:
+      return {
+        ...state,
+      };
+
+    case ProfileActionTypes.SUCCESS_LOAD_AVATAR:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          imageUrl:action.payload
+        },
+      };
+
+    case ProfileActionTypes.ERROR_LOAD_AVATAR:
+      return {
+        ...state,
       };
 
     default:

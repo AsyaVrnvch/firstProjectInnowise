@@ -4,11 +4,11 @@ import * as Styles from "./InfoModal.Styles";
 
 interface ModalProps {
   title: string;
-  content: string;
+  content?: string;
   onClose: () => void;
 }
 
-const InfoModal: React.FC<ModalProps> = ({ title, content, onClose }) => {
+const InfoModal: React.FC<ModalProps> = ({ title, content, onClose, children }) => {
   return (
     <Styles.Modal>
       <Styles.Dialog>
@@ -16,7 +16,7 @@ const InfoModal: React.FC<ModalProps> = ({ title, content, onClose }) => {
           <Styles.Title>{title}</Styles.Title>
         </Styles.Header>
         <Styles.Body>
-          <Styles.Content>{content}</Styles.Content>
+          <Styles.Content>{content}{children}</Styles.Content>
         </Styles.Body>
         <Styles.Footer>
           <Button onClick={onClose}>OK</Button>

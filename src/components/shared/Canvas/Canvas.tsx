@@ -38,13 +38,13 @@ const Canvas: React.FC = () => {
     }
   })
 
-  const mouseDownHandler = (event) => {
+  const mouseDownHandler = (event: React.MouseEvent) => {
     setMouse(true);
     let url = canvasRef.current ? canvasRef.current?.toDataURL("image/png") : '';
     setDataUrl(url);
     ctx?.beginPath();
-    let startX = event.pageX - event.target.offsetLeft;
-    let startY = event.pageY - event.target.offsetTop;
+    let startX = event.pageX - (event.target as HTMLElement).offsetLeft;
+    let startY = event.pageY - (event.target as HTMLElement).offsetTop;
     ctx?.moveTo(startX, startY);
     setStartPos({
       x:startX,
@@ -52,7 +52,7 @@ const Canvas: React.FC = () => {
     })
   }
 
-  const mouseMoveHandler = (event) => {
+  const mouseMoveHandler = (event: React.MouseEvent) => {
     if(mouse){ 
       switch(tool){
         case 'eraser':
