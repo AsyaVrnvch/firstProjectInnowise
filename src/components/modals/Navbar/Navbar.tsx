@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
     return (
       <Styles.NavbarContainer>
         <Styles.NavbarLinkContainer>
-          <Link to={AppRoutes.Main}>Main page</Link>
+          <Link to={AppRoutes.Timeline}>TimeLine</Link>
         </Styles.NavbarLinkContainer>
         <Styles.NavbarLinkContainer>
           <Link to={AppRoutes.SignIn}>Sign In</Link>
@@ -38,6 +38,9 @@ const Navbar: React.FC = () => {
     <Styles.NavbarContainer>
       <Styles.NavbarLinkContainer>
         <Link to={AppRoutes.Main}>Main page</Link>
+      </Styles.NavbarLinkContainer>
+      <Styles.NavbarLinkContainer>
+        <Link to={AppRoutes.Timeline}>TimeLine</Link>
       </Styles.NavbarLinkContainer>
       <Styles.NavbarLinkContainer>
         <Link to={AppRoutes.CanvasPage}>Canvas page</Link>

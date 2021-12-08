@@ -1,16 +1,16 @@
 import React from 'react';
 import * as Styles from "./ImageGrid.Styles";
-import { useSelector } from "react-redux";
-import { selectAllImages } from "../../../redux/selectors/images";
 import UserImage from "../UserImage/UserImage";
+import { Image } from "../../../redux/reducers/images"; 
+import { useState } from "react";
+import ImageModal from "../../modals/ImageModal/ImageModal";
 
 interface ImageGridProps{
-    setSelectedImage
+    allImages: Array<Image>
 }
 
-const ImageGrid: React.FC<ImageGridProps> = ({ setSelectedImage }) => {
-    const allImages = useSelector(selectAllImages);
-    
+const ImageGrid: React.FC<ImageGridProps> = ({ allImages }) => {
+    const [selectedImage, setSelectedImage] = useState<string>('');
     return(
         <Styles.ImageGridContainer>
             {allImages && allImages.map(image => (
@@ -20,6 +20,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({ setSelectedImage }) => {
                     />
                 </div>
             ))}
+            {selectedImage && <ImageModal selectedImage={selectedImage} setSelectedImage={setSelectedImage}/>}
         </Styles.ImageGridContainer>
     )
 }
