@@ -9,18 +9,18 @@ export const ImageModalContainer = styled.div`
     background: rgba(0,0,0,0.5);
 
     & div{
-        max-width: 60%;
-        max-height: 80%;
+        max-width: 40%;
+        max-height: 90%;
         margin: 60px auto;
         box-shadow: 3px 5px 7px rgba(0,0,0,0.5);
-        border: 3px solid black;
+        border: 3px solid #a1b1d7;
         background: white;
     }
 
     & div img{
         display: block;
         width: 100%;
-        border-bottom: 3px solid black;
+        border-bottom: 3px solid #a1b1d7;
         background: white;
     }
 

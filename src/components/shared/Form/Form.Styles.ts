@@ -9,4 +9,5 @@ export const FormContainer = styled.form`
   text-align: left;
   border: 1px solid black;
   padding-top: 0px;
+  background-color: white;
 `;

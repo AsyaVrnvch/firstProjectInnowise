@@ -2,13 +2,15 @@ import { combineReducers } from "redux";
 import authState, { State } from "./auth";
 import imagesState, { ImagesState } from "./images";
 import canvasState, { CanvasState } from "./canvas";
-import timelineState from "./timeline";
+import timelineState, { TimelineState } from "./timeline";
+import profileState, { ProfileState } from "./profile";
 
 export interface AppState {
   authState: State;
   imagesState: ImagesState;
   canvasState: CanvasState;
-  timelineState: ImagesState;
+  timelineState: TimelineState;
+  profileState: ProfileState;
 }
 
 export default combineReducers({
@@ -16,4 +18,5 @@ export default combineReducers({
   imagesState,
   canvasState,
   timelineState,
+  profileState,
 });

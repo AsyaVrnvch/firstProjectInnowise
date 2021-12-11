@@ -6,7 +6,7 @@ export enum CanvasActionTypes {
   CHANGE_WIDTH = "[Canvas] CHANGE_WIDTH",
   CHANGE_COLOR = "[Canvas] CHANGE_COLOR",
 
-  CHANGE_IMAGE = "[Canvas] CHANGE_IMAGE",
+  RESET_STATE = "[Canvas] RESET_STATE",
 
   SAVE_REQUEST = "[Canvas] SAVE_REQUEST",
   SAVING_IMAGE = "[Canvas] SAVING_IMAGE",
@@ -29,9 +29,8 @@ export const changeColor = createAction(
   (payload: { color:string }) => payload
 );
 
-export const changeImage = createAction(
-  CanvasActionTypes.CHANGE_IMAGE,
-  (payload: { url:string }) => payload
+export const resetCanvas = createAction(
+  CanvasActionTypes.RESET_STATE
 );
 
 export const saveRequest = createAction(

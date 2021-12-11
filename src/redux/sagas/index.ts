@@ -19,5 +19,6 @@ export default function* rootSaga() {
     takeEvery(CanvasActionTypes.SAVING_IMAGE, canvasSaga.savingCanvasImage),
     takeEvery(TimelineActionTypes.LOADING_IMAGES, imagesSaga.loadingAllImagesWorker),
     takeEvery(ProfileActionTypes.LOADING_AVATAR, profileSaga.loadingAvatar),
+    takeEvery(ProfileActionTypes.CHANGING_TITLE, profileSaga.changingTitle),
   ]);
 }

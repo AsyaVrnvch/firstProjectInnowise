@@ -22,7 +22,7 @@ const SignInForm: React.FC = () => {
   const onSubmit = ( data: { email:string, password:string} ) => {
     dispatch(
         signingInAction({
-          email: data.email,
+          email: data.email,          
           password: data.password,
         })
       );

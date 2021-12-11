@@ -1,11 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUsername } from "../../redux/selectors/auth";
+import { selectUsername } from "../../redux/selectors/profile";
 import PhotoForm from "../shared/PhotoForm/PhotoForm";
 import ImageGrid from "../shared/ImageGrid/ImageGrid";
 import { loadingImages } from "../../redux/actions/images"
 import { selectMyImages } from "../../redux/selectors/images";
+import Title from "../shared/Title/Title";
 
 const Main: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,10 +20,9 @@ const Main: React.FC = () => {
 
   return (
     <div>
-      <h3>MainPage</h3>
       <p>{username}</p>
-      <h4>Your avatar</h4>
       <PhotoForm/>
+      <Title/>
       <ImageGrid allImages={myImages}/>
     </div>
   );

@@ -7,21 +7,23 @@ export const NavbarLinkContainer = styled.button`
   padding: 4px 10 px;
   border: none;
   font-size: 25px;
+  font-family: inherit;
   cursor: pointer;
-  color: black;
-  background-color: white;
+  background-color: #434d65;
   text-decoration: none;
   :hover {
-    background-color: #98efc0;
+    background-color: #a1b1d7;
     border-radius: 5px;
+    & *{
+      color: black;
+    }
   }
   & * {
-    color: black;
+    color: white;
     text-decoration: none;
   }
 `;
 
 export const NavbarContainer = styled.div`
   border-bottom: 3px solid #98efc0;
-  margin-bottom: 5px;
 `;

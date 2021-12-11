@@ -11,5 +11,10 @@ export const loadAvatar = async (file: File) => {
         "imageUrl":url
     })
     return url;
+}
 
+export const changeTitle = async (title: string) => {
+    const uid = await currentUID();
+    await users.doc(uid).update({ title });
+    return title
 }

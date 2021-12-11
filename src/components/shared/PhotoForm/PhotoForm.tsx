@@ -2,8 +2,7 @@ import { useState } from "react";
 import * as Styles from "./PhotoForm.Styles";
 import Error from "../Error/Error";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAvatar } from "../../../redux/selectors/auth";
-import InfoModal from "../../modals/InfoModal/InfoModal";
+import { selectAvatar } from "../../../redux/selectors/profile";
 import { loadingAvatar } from "../../../redux/actions/profile";
 
 const PhotoForm: React.FC = () => {

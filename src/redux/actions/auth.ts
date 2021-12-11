@@ -17,8 +17,9 @@ export enum AuthActionTypes {
 }
 
 export const checkingAuth = createAction(
-  AuthActionTypes.CHECKING_AUTH
-)
+  AuthActionTypes.CHECKING_AUTH,
+  (payload: { uid: string }) => payload
+);
 
 export const signingInAction = createAction(
   AuthActionTypes.SIGNING_IN,

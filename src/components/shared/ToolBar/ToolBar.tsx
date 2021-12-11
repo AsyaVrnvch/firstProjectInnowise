@@ -5,7 +5,7 @@ import Brush from "@material-ui/icons/BrushOutlined";
 import Save from "@material-ui/icons/SaveOutlined";
 import Rectangle from "@material-ui/icons/Crop32Outlined";
 import Circle from "@material-ui/icons/RadioButtonUncheckedOutlined";
-import Eraser from "@material-ui/icons/LocationSearchingOutlined";
+import Eraser from "@material-ui/icons/Adjust";
 import { Remove as Line } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import { changeToolAction, saveRequest } from "../../../redux/actions/canvas";

@@ -4,7 +4,7 @@ import ToolBar from "../shared/ToolBar/ToolBar";
 import SettingBar from "../shared/SettingBar/SettingBar";
 import * as Styles from "../shared/CanvasForm/CanvasForm.Styles";
 
-function CanvasPage() {
+const CanvasPage: React.FC = () => {
 
   return (
     <Styles.CanvasFormContainer>

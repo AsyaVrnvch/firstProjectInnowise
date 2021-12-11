@@ -6,8 +6,8 @@ export const CanvasContainer = styled.div`
     align-items: center;
     
     canvas {
-        width: 100%;
-        height: 100%;
+        width: ${props => props.width};
+        height: ${props => props.height};
     }
     
 `;

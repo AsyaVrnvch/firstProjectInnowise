@@ -6,21 +6,26 @@ import { useState } from "react";
 import ImageModal from "../../modals/ImageModal/ImageModal";
 
 interface ImageGridProps{
-    allImages: Array<Image>
+    allImages: Array<Image>,
+    username?: boolean,
 }
 
-const ImageGrid: React.FC<ImageGridProps> = ({ allImages }) => {
+const ImageGrid: React.FC<ImageGridProps> = ({ allImages, username, ...props }) => {
     const [selectedImage, setSelectedImage] = useState<Image|null>();
     return(
-        <Styles.ImageGridContainer>
+        <Styles.ImageGridContainer {...props}>
             {allImages && allImages.map(image => (
                 <div key={image.id}>
-                    <UserImage data={image} 
+                    <UserImage data={image}
                         onClick={() => setSelectedImage(image) }
                     />
+                    { username && <span className="username">{image.username}</span> }
                 </div>
             ))}
-            {selectedImage && <ImageModal selectedImage={selectedImage} setSelectedImage={setSelectedImage}/>}
+            {selectedImage && <ImageModal 
+                selectedImage={selectedImage} 
+                setSelectedImage={setSelectedImage}
+            />}
         </Styles.ImageGridContainer>
     )
 }

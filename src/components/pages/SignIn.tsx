@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/selectors/auth";
 import { useHistory } from "react-router-dom";
+import { AppRoutes } from "../../config/routes";
 
 const SignIn: React.FC = () => {
   const isAuth = useSelector(selectIsAuth);
@@ -10,7 +11,7 @@ const SignIn: React.FC = () => {
 
   useEffect(() => {
     if(isAuth) {
-      history.replace("/main");
+      history.replace(AppRoutes.Main);
     }
   }, [isAuth])
 

@@ -6,11 +6,13 @@ export const getCurrentUser = async (uid:string) => {
     if(!docRef) throw Error();
     const snapshot = await getDoc(docRef);
     const data = await snapshot.data();
+    if (!data) throw Error();
     return {
         uid,
-        email:data?.email,
-        username:data?.username,
-        imageUrl:data?.imageUrl
+        email:data.email,
+        username:data.username,
+        imageUrl:data.imageUrl,
+        title: data.title,
     }
 }
 
@@ -48,6 +50,6 @@ export const signUp = async (
     if(!userData) throw Error();
     const uid = userData?.user?.uid;
     const imageUrl = "https://w7.pngwing.com/pngs/906/222/png-transparent-computer-icons-user-profile-avatar-french-people-computer-network-heroes-black.png";
-    users.doc(uid).set({ uid, email, username, imageUrl }); 
+    users.doc(uid).set({ uid, email, username, imageUrl, title: "" }); 
     users.doc(uid).collection("images");
 }

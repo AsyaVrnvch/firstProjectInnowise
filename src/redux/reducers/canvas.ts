@@ -7,14 +7,16 @@ const initialState = {
     tool:'brush',
     color:'black',
     width: 1,
+    preloader: false,
 };
 
 export interface CanvasState {
-    error:string,
+    error: string,
     isSaving: boolean,
     tool: string,
     color: string,
     width: number,
+    preloader: boolean,
 }
 
 export default function canvasState(
@@ -40,26 +42,40 @@ export default function canvasState(
                 color: action.payload
             }
 
+        case CanvasActionTypes.RESET_STATE:
+            return {
+                error:'',
+                isSaving: false,
+                tool:'brush',
+                color:'black',
+                width: 1,
+                preloader: false,
+            }
+
         case CanvasActionTypes.SAVE_REQUEST:
             return {
                 ...state,
                 isSaving: true,
+                preloader: true,
             }
 
         case CanvasActionTypes.SAVING_IMAGE:
             return {
                 ...state,
                 isSaving: false,
+                preloader: true,
             }
 
         case CanvasActionTypes.SUCCESS_SAVED_IMAGE:
             return {
                 ...state,
+                preloader: false,
             }
 
         case CanvasActionTypes.ERROR_SAVED_IMAGE:
             return {
                 ...state,
+                preloader: false,
             }
 
         default:

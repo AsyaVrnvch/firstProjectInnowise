@@ -1,27 +1,18 @@
 import { AnyAction } from "redux";
 import { AuthActionTypes } from "../actions/auth";
-import { ProfileActionTypes } from "../actions/profile";
 
 const initialState = {
   regInfo: "",
   authError: "",
   isAuth: false,
-  currentUser: {
-    email: "",
-    username: "",
-    imageUrl:"",
-  },
+  preloader: false,
 };
 
 export interface State {
   regInfo: string;
   authError: string;
   isAuth: boolean;
-  currentUser: {
-    email: string;
-    username: string;
-    imageUrl: string;
-  };
+  preloader: boolean;
 }
 
 export default function authState(
@@ -30,22 +21,25 @@ export default function authState(
 ) {
   switch (action.type) {
     case AuthActionTypes.CHECKING_AUTH:
-      return state;
+      return {
+        ...state,
+        preloader: true,
+      };
 
     case AuthActionTypes.SIGNING_UP:
-      return state;
+      return {
+        ...state,
+        regInfo:"",
+        preloader: true,
+      };
 
     case AuthActionTypes.SUCCESS_SIGN_UP:
       return {
         ...state,
         regInfo: "Пользователь успешно зарегистрирован",
         authError: "",
-        currentUser: {
-          email: "",
-          username: "",
-          imageUrl:""
-        },
         isAuth: false,
+        preloader: false,
       };
 
     case AuthActionTypes.ERROR_SIGN_UP:
@@ -53,42 +47,37 @@ export default function authState(
         ...state,
         regInfo: action.payload.error.message,
         authError: "",
-          currentUser: {
-            email: "",
-            username: "",
-            imageUrl:""
-          },
         isAuth: false,
+        preloader: false,
       };
 
     case AuthActionTypes.SIGNING_IN:
-      return state;
+      return {
+        ...state,
+        preloader: true,
+      };
 
     case AuthActionTypes.SUCCESS_SIGN_IN:
       return {
         ...state,
         isAuth: true,
         authError: "",
-        regInfo: "",
-        currentUser: action.payload
+        preloader: false,
       };
 
     case AuthActionTypes.ERROR_SIGN_IN:
       return {
         ...state,
         isAuth: false,
-        currentUser: {
-          email: "",
-          username: "",
-          imageUrl:""
-        },
         regInfo: "",
         authError: action.payload.error,
+        preloader: false,
       };
 
     case AuthActionTypes.SIGNING_OUT:
       return {
-        ...state
+        ...state,
+        preloader: true,
       };
 
     case AuthActionTypes.SUCCESS_SIGN_OUT:
@@ -97,36 +86,14 @@ export default function authState(
         regInfo: "",
         authError: "",
         isAuth: false,
-        currentUser: {
-          email: "",
-          username: "",
-          imageUrl:""
-        },
+        preloader: false,
       };
 
     case AuthActionTypes.ERROR_SIGN_OUT:
       return {
         ...state,
-        authError:action.payload
-      };
-
-    case ProfileActionTypes.LOADING_AVATAR:
-      return {
-        ...state,
-      };
-
-    case ProfileActionTypes.SUCCESS_LOAD_AVATAR:
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          imageUrl:action.payload
-        },
-      };
-
-    case ProfileActionTypes.ERROR_LOAD_AVATAR:
-      return {
-        ...state,
+        authError:action.payload,
+        preloader: true,
       };
 
     default:

@@ -1,138 +1,82 @@
-//BRUSH---------------------
+//BRUSH, ERASER---------------------
 export const mouseMoveHandlerBrush = (
     ctx:CanvasRenderingContext2D | null, 
     e: React.MouseEvent, 
+    offset:{ 
+        left:number,
+        top: number
+    },
     color: string,
     widthLine: number
 ) => {
-    drawBrush(
-        ctx || null,
-        e.pageX - (e.target as HTMLElement).offsetLeft, 
-        e.pageY - (e.target as HTMLElement).offsetTop,
-        color,
-        widthLine
-    );
-}
-
-const drawBrush = (
-    ctx:CanvasRenderingContext2D | null, 
-    x: number, 
-    y: number,
-    color: string,
-    widthLine: number
-) => {
-    ctx?.lineTo(x,y);
+    if(!ctx) return 
+    ctx.lineCap="round";
+    ctx.lineTo(e.pageX - offset.left, e.pageY - offset.top);
     if(ctx){
         ctx.strokeStyle = color;
         ctx.lineWidth = widthLine;
     }
-    ctx?.stroke();
+    ctx.stroke();
 }
 
 //RECTANGLE---------------------
 export const mouseMoveHandlerRectangle = (
     ctx:CanvasRenderingContext2D | null, 
     e: React.MouseEvent,  
-    startX: number, 
-    startY: number,
-    canvasWidth: number, 
-    canvasHeight:number,
+    start: { x: number, y: number },
+    offset:{ left:number, top: number },
+    canvasSize: { height: number, width: number },
     dataUrl: string,
     color: string,
     widthLine: number
 ) => {
-    let currentX = e.pageX - (e.target as HTMLElement).offsetLeft;
-    let currentY = e.pageY - (e.target as HTMLElement).offsetTop;
-    let width = currentX - startX;
-    let height = currentY - startY;
-    drawRectangle(
-        ctx || null,
-        startX, startY, width, height,
-        canvasWidth, canvasHeight,
-        dataUrl,
-        color, 
-        widthLine
-    );
-}
-
-const drawRectangle = (
-    ctx:CanvasRenderingContext2D | null, 
-    x: number, 
-    y: number, 
-    width: number, 
-    height: number,
-    canvasWidth: number, 
-    canvasHeight: number,
-    dataUrl: string,
-    color: string,
-    widthLine: number
-) => {
-        const img = new Image();
-        img.src = dataUrl;
-        img.onload = () => {
-            ctx?.clearRect(0, 0, canvasWidth, canvasHeight);
-            ctx?.drawImage(img, 0, 0, canvasWidth, canvasHeight);
-            ctx?.beginPath();
-            if(ctx){
-                ctx.strokeStyle = color;
-                ctx.lineWidth = widthLine;
-            }
-            ctx?.rect(x,y,width,height);
-            ctx?.stroke();
+    let width = e.pageX - offset.left - start.x;
+    let height = e.pageY - offset.top - start.y;
+    
+    const img = new Image();
+    img.src = dataUrl;
+    img.onload = () => {
+        ctx?.clearRect(0, 0, canvasSize.width, canvasSize.height);
+        ctx?.drawImage(img, 0, 0, canvasSize.width, canvasSize.height,);
+        ctx?.beginPath();
+        if(ctx){
+            ctx.strokeStyle = color;
+            ctx.lineWidth = widthLine;
         }
-        
+        ctx?.rect(start.x, start.y,width,height);
+        ctx?.stroke();
+    }
 }
 
 //CIRCLE---------------------
 export const mouseMoveHandlerCircle = (
     ctx:CanvasRenderingContext2D | null, 
     e: React.MouseEvent,  
-    startX: number, 
-    startY: number,
-    canvasWidth: number, 
-    canvasHeight:number,
+    start: { x: number, y: number },
+    offset:{ left:number, top: number },
+    canvasSize: { height: number, width: number },
     dataUrl: string,
     color: string,
     widthLine: number
 ) => {
-    let currentX = e.pageX - (e.target as HTMLElement).offsetLeft;
-    let currentY = e.pageY - (e.target as HTMLElement).offsetTop;
-    let width = currentX - startX;
-    let height = currentY - startY;
-    let radius = Math.sqrt(width**2+height**2)
-    drawCircle(
-        ctx || null,
-        startX, startY, radius,
-        canvasWidth, canvasHeight,
-        dataUrl,
-        color, 
-        widthLine
-    );
-}
+    let width = e.pageX - offset.left - start.x;
+    let height = e.pageY - offset.top - start.y;
+    let radius = Math.sqrt(width**2+height**2);
 
-const drawCircle = (
-    ctx:CanvasRenderingContext2D | null, 
-    x: number, 
-    y: number, 
-    radius: number,
-    canvasWidth: number, 
-    canvasHeight: number,
-    dataUrl: string,
-    color: string,
-    widthLine: number
-) => {
     const img = new Image();
     img.src = dataUrl;
+    if(!ctx) return 
     img.onload = () => {
-        ctx?.clearRect(0, 0, canvasWidth, canvasHeight);
-        ctx?.drawImage(img, 0, 0, canvasWidth, canvasHeight);
-        ctx?.beginPath();
+        ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
+        ctx.drawImage(img, 0, 0, canvasSize.width, canvasSize.height);
+        ctx.beginPath();
         if(ctx){
             ctx.strokeStyle = color;
             ctx.lineWidth = widthLine;
         }
-        ctx?.arc(x, y, radius, 0, 2*Math.PI);
-        ctx?.stroke();
+        ctx.lineCap="round";
+        ctx.arc(start.x, start.y, radius, 0, 2*Math.PI);
+        ctx.stroke();
     }
 }
 
@@ -140,48 +84,30 @@ const drawCircle = (
 export const mouseMoveHandlerLine = (
     ctx:CanvasRenderingContext2D | null, 
     e: React.MouseEvent, 
-    startX: number, 
-    startY: number,
-    canvasWidth: number, 
-    canvasHeight: number,
+    start: { x: number, y: number },
+    offset:{ left:number, top: number },
+    canvasSize: { height: number, width: number },
     dataUrl: string,
     color: string,
     widthLine: number
 ) => {
-    let x = e.pageX - (e.target as HTMLElement).offsetLeft;
-    let y = e.pageY - (e.target as HTMLElement).offsetTop;
-    drawLine(
-        ctx || null, x, y,
-        startX, startY,
-        canvasWidth, canvasHeight,
-        dataUrl, color, widthLine
-    );
-}
+    let x = e.pageX - offset.left;
+    let y = e.pageY - offset.top;
 
-const drawLine = (
-    ctx:CanvasRenderingContext2D | null, 
-    x: number, 
-    y: number,
-    startX: number, 
-    startY: number, 
-    canvasWidth: number, 
-    canvasHeight: number,
-    dataUrl: string,
-    color: string,
-    widthLine: number
-) => {
     const img = new Image();
     img.src = dataUrl;
+    if(!ctx) return 
     img.onload = () => {
-        ctx?.clearRect(0, 0, canvasWidth, canvasHeight);
-        ctx?.drawImage(img, 0, 0, canvasWidth, canvasHeight);
-        ctx?.beginPath();
+        ctx.clearRect(0, 0, canvasSize.width, canvasSize.height,);
+        ctx.drawImage(img, 0, 0, canvasSize.width, canvasSize.height);
+        ctx.beginPath();
         if(ctx){
             ctx.strokeStyle = color;
             ctx.lineWidth = widthLine;
         }
-        ctx?.moveTo(startX, startY);
-        ctx?.lineTo(x, y);
-        ctx?.stroke();
+        ctx.lineCap="round";
+        ctx.moveTo(start.x, start.y);
+        ctx.lineTo(x, y);
+        ctx.stroke();
     }
 }

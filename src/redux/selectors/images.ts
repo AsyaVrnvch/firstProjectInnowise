@@ -1,9 +1,10 @@
 import { createSelector } from "reselect";
 import * as images from "../reducers/images";
+import * as timeline from "../reducers/timeline";
 import { AppState } from "../reducers";
 
 const selectImagesState = (state: AppState):images.ImagesState => state.imagesState;
-const selectTimelineState = (state: AppState):images.ImagesState => state.timelineState;
+const selectTimelineState = (state: AppState):timeline.TimelineState => state.timelineState;
 
 export const selectMyImages = createSelector(
   selectImagesState, 

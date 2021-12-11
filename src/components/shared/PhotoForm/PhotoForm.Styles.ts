@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export const PhotoFormContainer = styled.div`
   width: 100px;
-  position: relative;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
 
   & img{
     border-radius: 50%;
@@ -24,7 +26,7 @@ export const PhotoFormContainer = styled.div`
   }
 
   & .plus label{
-    z-index: 9999;
+    z-index: 9000;
     position: absolute;
     cursor: pointer;
     bottom: 13px;
@@ -36,26 +38,26 @@ export const DropdownContainer = styled.div`
   margin: 0px auto;
   text-align:center;
   & label{
-    border:1px solid black;
+    border: 1px solid black;
     display: block;
     margin:10px auto;
     width: 25px;
-    height:25px;
-    border-radius:50%;
-    line-height:25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 24px;
     background-color: white;
   }
   & label input{
     width: 0px;
-    height:0px;
+    height: 0px;
     opacity: 0;
   }
   & label:hover{
     background-color: #98efc0;
-    border:1px solid #98efc0;
+    border: 1px solid #98efc0;
   }
   & div.output{
-    height:20px;
-    font-size:18px;
+    height: 20px;
+    font-size: 18px;
   }  
 `

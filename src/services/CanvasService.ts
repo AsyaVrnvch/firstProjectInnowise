@@ -9,6 +9,9 @@ export const saveImage = async (image: Blob) =>{
     const uid = await currentUID();
     const createdAt = timestamp();
     const url = await storageRef.child('id'+id).getDownloadURL();
-    const snap = await users.doc(uid).collection("images").add({ url, createdAt })
-    return { id: snap.id, url, createdAt }
+    const usernameSnap = await users.doc(uid).get();
+    const data = await usernameSnap.data();
+    if(!data) throw Error();
+    const snap = await users.doc(uid).collection("images").add({ url, createdAt, username: data.username })
+    return { id: snap.id, url, createdAt, username: data.username }
 }
