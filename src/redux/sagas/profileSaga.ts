@@ -1,26 +1,23 @@
-import { put, call } from 'redux-saga/effects';
-import { AnyAction } from "redux";
-import * as ProfileActionTypes from "../actions/profile";
-import * as ProfileService from "../../services/ProfileService";
+import { put, call } from 'redux-saga/effects'
+import { AnyAction } from 'redux'
+import * as ProfileActionTypes from '../actions/profile'
+import * as ProfileService from '../../services/ProfileService'
 
-export function* loadingAvatar( action: AnyAction ) {
-    try{
-        const image = yield call(ProfileService.loadAvatar, action.payload);
-        yield put(ProfileActionTypes.successLoadAvatar(image));
-    }
-    catch(e){
-        console.log(e)
-        yield put(ProfileActionTypes.errorLoadAvatar(e));
-    }
+export function* loadingAvatar(action: AnyAction) {
+  try {
+    console.log(action.payload.file)
+    const image = yield call(ProfileService.loadAvatar, action.payload)
+    yield put(ProfileActionTypes.successLoadAvatar(image))
+  } catch (e) {
+    yield put(ProfileActionTypes.errorLoadAvatar(e))
+  }
 }
 
-export function* changingTitle( action: AnyAction ) {
-    try{
-        const title = yield call(ProfileService.changeTitle, action.payload);
-        yield put(ProfileActionTypes.successChangeTitle(title));
-    }
-    catch(e){
-        console.log(e)
-        yield put(ProfileActionTypes.errorChangeTitle(e));
-    }
+export function* changingTitle(action: AnyAction) {
+  try {
+    const title = yield call(ProfileService.changeTitle, action.payload)
+    yield put(ProfileActionTypes.successChangeTitle(title))
+  } catch (e) {
+    yield put(ProfileActionTypes.errorChangeTitle(e))
+  }
 }

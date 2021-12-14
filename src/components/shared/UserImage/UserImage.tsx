@@ -1,15 +1,13 @@
-import React from "react";
-import * as Styles from "./UserImage.Styles";
-import { Image } from "../../../redux/reducers/images";
+import React from 'react'
+import * as Styles from './UserImage.Styles'
+import { Image } from '../../../redux/reducers/images'
 
 interface UserImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-    data:Image,
+  data: Image
 }
 
-const UserImage: React.FC<UserImageProps> = ({ data ,...props }) => {
-    return (
-        <Styles.UserImageConteiner {...props} src = {data.url} alt="loading..."/>
-  );
-};
+const UserImage: React.FC<UserImageProps> = ({ data, ...props }) => {
+  return <Styles.UserImageConteiner {...props} src={data.url} alt="loading..." />
+}
 
-export default UserImage;
+export default UserImage

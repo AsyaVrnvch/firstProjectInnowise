@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   html{
@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
          div.content{
           background-color: #a1b1d7;
           width: 60%;
-          min-width: 510px;
+          min-width: 610px;
           min-height: 100%;
           margin: 0px auto;
           border-left: 1px solid black;
@@ -35,4 +35,4 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   
-`;
+`

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ButtonContainer = styled.button`
   background-color: #98efc0;
@@ -10,4 +10,4 @@ export const ButtonContainer = styled.button`
   font-size: 20px;
   cursor: pointer;
   display: block;
-`;
+`

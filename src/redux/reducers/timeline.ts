@@ -1,45 +1,42 @@
-import { AnyAction } from "redux";
-import { TimelineActionTypes } from "../actions/timeline";
-import { Image } from "./images";
+import { AnyAction } from 'redux'
+import { TimelineActionTypes } from '../actions/timeline'
+import { Image } from './images'
 
 const initialState = {
-    error:'',
-    images:[],
-    preloader: false,
-};
-
-export interface TimelineState {
-    error: string,
-    images: Array<Image>,
-    preloader: boolean,
+  error: '',
+  images: [],
+  preloader: false,
 }
 
-export default function timelineState(
-  state: TimelineState = initialState,
-  action: AnyAction
-){
-    switch (action.type) {
-        case TimelineActionTypes.LOADING_IMAGES:
-            return {
-                ...state,
-                preloader: true,
-            }
+export interface TimelineState {
+  error: string
+  images: Array<Image>
+  preloader: boolean
+}
 
-        case TimelineActionTypes.SUCCESS_LOAD_IMAGES:
-            return {
-                ...state,
-                images:action.payload,
-                preloader: false,
-            }
+export default function timelineState(state: TimelineState = initialState, action: AnyAction) {
+  switch (action.type) {
+    case TimelineActionTypes.LOADING_IMAGES:
+      return {
+        ...state,
+        preloader: true,
+      }
 
-        case TimelineActionTypes.ERROR_LOAD_IMAGES:
-            return {
-                ...state,
-                error:action.payload,
-                preloader: false,
-            }
+    case TimelineActionTypes.SUCCESS_LOAD_IMAGES:
+      return {
+        ...state,
+        images: action.payload,
+        preloader: false,
+      }
 
-        default:
-            return state;
-    }
-} 
+    case TimelineActionTypes.ERROR_LOAD_IMAGES:
+      return {
+        ...state,
+        error: action.payload,
+        preloader: false,
+      }
+
+    default:
+      return state
+  }
+}
