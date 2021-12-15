@@ -7,7 +7,7 @@ import { changingTitle } from '../../../../../redux/actions/profile'
 
 interface TitleProps {}
 
-const Title: React.FC<TitleProps> = () => {
+const Title: React.FC<TitleProps> = React.memo(() => {
   const dispatch = useDispatch()
  
   const [title, setTitle] = useState<string>('')
@@ -46,6 +46,6 @@ const Title: React.FC<TitleProps> = () => {
       )}
     </div>
   )
-}
+})
 
 export default Title

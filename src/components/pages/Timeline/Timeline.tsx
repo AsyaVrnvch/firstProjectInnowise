@@ -1,6 +1,6 @@
 import React from 'react'
 import ImageGrid from '../../shared/ImageGrid/ImageGrid'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllImages } from '../../../redux/selectors/images'
 import { loadingImages } from '../../../redux/actions/timeline'
@@ -21,13 +21,13 @@ const TimeLine: React.FC = () => {
     setImages(allImages)
   }, [allImages])
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
     const query = (event.target as HTMLInputElement).value
     const filterImages = allImages.filter((image) => {
       if (image.username.includes(query)) return image
     })
     setImages(filterImages)
-  }
+  },[])
 
   return (
     <div>

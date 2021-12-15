@@ -5,7 +5,6 @@ import * as ProfileService from '../../services/ProfileService'
 
 export function* loadingAvatar(action: AnyAction) {
   try {
-    console.log(action.payload.file)
     const image = yield call(ProfileService.loadAvatar, action.payload)
     yield put(ProfileActionTypes.successLoadAvatar(image))
   } catch (e) {

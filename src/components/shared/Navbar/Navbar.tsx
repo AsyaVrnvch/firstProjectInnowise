@@ -5,12 +5,26 @@ import { AppRoutes } from '../../../config/routes'
 import { selectIsAuth } from '../../../redux/selectors/auth'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { useEffect } from "react"
 import { signingOutAction } from '../../../redux/actions/auth'
 
-const Navbar: React.FC = () => {
+interface NavBarLinkProps extends React.HTMLAttributes<HTMLElement>{
+  to: AppRoutes;
+  text: string
+}
+
+const NavBarLink: React.FC<NavBarLinkProps> = ({to, text, ...props}) => {
+  return (
+    <Styles.NavbarLinkContainer {...props}>
+      <Link to={to}>{text}</Link>
+    </Styles.NavbarLinkContainer>
+  )
+}
+
+const Navbar: React.FC = React.memo(() => {
   const isAuth = useSelector(selectIsAuth)
   const dispatch = useDispatch()
-  const history = useHistory()
+  const history = useHistory()  
 
   function signOut() {
     dispatch(signingOutAction())
@@ -20,37 +34,26 @@ const Navbar: React.FC = () => {
   if (!isAuth) {
     return (
       <Styles.NavbarContainer>
-        <Styles.NavbarLinkContainer>
-          <Link to={AppRoutes.Timeline}>TimeLine</Link>
-        </Styles.NavbarLinkContainer>
-        <Styles.NavbarLinkContainer>
-          <Link to={AppRoutes.SignIn}>Sign In</Link>
-        </Styles.NavbarLinkContainer>
-        <Styles.NavbarLinkContainer>
-          <Link to={AppRoutes.SignUp}>Sign Up</Link>
-        </Styles.NavbarLinkContainer>
+        <NavBarLink to={AppRoutes.Timeline} text="Timeline"/>
+        <NavBarLink to={AppRoutes.SignIn} text="SignIn"/>
+        <NavBarLink to={AppRoutes.SignUp} text="SignUp"/>
       </Styles.NavbarContainer>
     )
   }
 
   return (
     <Styles.NavbarContainer>
-      <Styles.NavbarLinkContainer>
-        <Link to={AppRoutes.Main}>Main page</Link>
-      </Styles.NavbarLinkContainer>
-      <Styles.NavbarLinkContainer>
-        <Link to={AppRoutes.Timeline}>TimeLine</Link>
-      </Styles.NavbarLinkContainer>
-      <Styles.NavbarLinkContainer>
-        <Link to={AppRoutes.CanvasPage}>Canvas page</Link>
-      </Styles.NavbarLinkContainer>
-      <Styles.NavbarLinkContainer className="right">
-        <Link to={AppRoutes.SignIn} onClick={signOut}>
-          Log out
-        </Link>
-      </Styles.NavbarLinkContainer>
+        <NavBarLink to={AppRoutes.Main} text="Main Page"/>
+        <NavBarLink to={AppRoutes.Timeline} text="Timeline"/>
+        <NavBarLink to={AppRoutes.CanvasPage} text="Canvas Page"/>
+        <NavBarLink 
+          to={AppRoutes.SignIn} 
+          text="Log out" 
+          className="right" 
+          onClick={signOut}
+        />
     </Styles.NavbarContainer>
   )
-}
+})
 
 export default Navbar

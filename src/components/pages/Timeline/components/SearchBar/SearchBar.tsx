@@ -5,7 +5,7 @@ import * as Styles from './SearchBar.Styles'
 
 interface SearchBarProps extends React.HTMLAttributes<HTMLInputElement> {}
 
-const SearchBar: React.FC<SearchBarProps> = (props) => {
+const SearchBar: React.FC<SearchBarProps> = React.memo((props) => {
   return (
     <Styles.SearchBarContainer {...props}>
       <Styles.TextInput
@@ -20,6 +20,6 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
       />
     </Styles.SearchBarContainer>
   )
-}
+})
 
 export default SearchBar

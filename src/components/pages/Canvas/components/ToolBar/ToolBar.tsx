@@ -16,9 +16,9 @@ interface ToolBarProps {}
 
 const ToolBar: React.FC<ToolBarProps> = (props) => {
   const dispatch = useDispatch()
-
+  
   const handleClick = (tool: string) => () => {
-    dispatch(changeToolAction({ tool }))
+    dispatch(changeToolAction({ tool }));
   }
 
   const saveImage = () => {

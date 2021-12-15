@@ -16,6 +16,10 @@ const Main: React.FC = () => {
     dispatch(loadingImages())
   }, [])
 
+  useEffect(() => {
+    console.log('render mainPage')
+  })
+
   const myImages = useSelector(selectMyImages)
 
   return (

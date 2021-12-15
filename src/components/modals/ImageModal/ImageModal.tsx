@@ -1,5 +1,6 @@
 import * as Styles from './ImageModal.Styles'
 import { Image } from '../../../redux/reducers/images'
+import { useEffect, useCallback } from 'react'
 
 interface ImageModalProps {
   selectedImage: Image
@@ -12,6 +13,10 @@ const ImageModal: React.FC<ImageModalProps> = ({ selectedImage, setSelectedImage
       setSelectedImage(null)
     }
   }
+
+  useEffect(() => {
+    console.log('render image modal')
+  })
 
   return (
     <Styles.ImageModalContainer className="backdrop" onClick={handleClick}>

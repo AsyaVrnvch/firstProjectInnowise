@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import * as Styles from './PhotoForm.Styles'
 import Error from '../../../../shared/Error/Error'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,7 +6,7 @@ import { selectAvatar } from '../../../../../redux/selectors/profile'
 import { loadingAvatar } from '../../../../../redux/actions/profile'
 import { toast } from 'react-toastify'
 
-const PhotoForm: React.FC = () => {
+const PhotoForm: React.FC = React.memo(() => {
   const dispatch = useDispatch()
   const avatar = useSelector(selectAvatar)
 
@@ -34,6 +34,6 @@ const PhotoForm: React.FC = () => {
       </Styles.Dropdown>
     </Styles.PhotoFormContainer>
   )
-}
+})
 
 export default PhotoForm
