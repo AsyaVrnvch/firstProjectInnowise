@@ -1,12 +1,38 @@
-// import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
-import { createGlobalStyle } from "styled-components";
-
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
-  body{
-    margin:0px;
-    padding:0px;
-    font-size:22px;
-    box-sizing:border-box;
+  html{
+    height: 100%;
   }
-`;
+
+  body{
+    margin: 0px;
+    padding: 0px;
+    font-size: 22px;
+    box-sizing: border-box;
+    font-family: "Calibri Light";
+    background-color: #434d65;
+    height: 100%;
+
+    #root{
+       height: 100%;
+
+       & > div{
+         height: 100%;
+
+         div.content{
+          background-color: #a1b1d7;
+          width: 60%;
+          min-width: 610px;
+          min-height: 100%;
+          margin: 0px auto;
+          border-left: 1px solid black;
+          border-right: 1px solid black;
+          padding: 10px;
+          position: relative;
+        }
+       }
+    }
+  }
+  
+`

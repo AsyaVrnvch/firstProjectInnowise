@@ -1,12 +1,10 @@
-import React from "react";
-import * as Styles from "./Button.styles";
+import React from 'react'
+import * as Styles from './Button.styles'
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}
 
-}
+const Button: React.FC<ButtonProps> = React.memo((props) => {
+  return <Styles.ButtonContainer {...props} />
+})
 
-const Button: React.FC<ButtonProps> = ( props ) => {
-  return <Styles.ButtonContainer {...props} />;
-};
-
-export default Button;
+export default Button

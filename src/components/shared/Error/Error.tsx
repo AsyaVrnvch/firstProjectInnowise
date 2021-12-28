@@ -1,12 +1,10 @@
-import React from "react";
-import * as Styles from "./Error.styles";
+import React from 'react'
+import * as Styles from './Error.styles'
 
-interface ErrorProps{
+interface ErrorProps {}
 
-}
+const Error: React.FC = React.memo((props: ErrorProps) => {
+  return <Styles.ErrorContainer {...props} />
+})
 
-const Error: React.FC = (props: ErrorProps) => {
-  return <Styles.ErrorContainer {...props} />;
-};
-
-export default Error;
+export default Error

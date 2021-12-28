@@ -1,15 +1,23 @@
-import { put, call } from 'redux-saga/effects';
-import { AnyAction } from "redux";
-import * as ImagesActionTypes from "../actions/images";
-import * as ImageService from "../../services/ImageService";
+import { put, call } from 'redux-saga/effects'
+import { AnyAction } from 'redux'
+import * as ImagesActionTypes from '../actions/images'
+import * as ImagesService from '../../services/ImageService'
+import * as TimelineActionTypes from '../actions/timeline'
 
-export function* loadingImageWorker( action: AnyAction ) {
-    try{
-        yield call(ImageService.loadImage,action.payload);
-        yield put(ImagesActionTypes.successLoadImage());
-    }
-    catch(e){
-        console.log(e)
-        yield put(ImagesActionTypes.errorLoadImage(e));
-    }
+export function* loadMyImages(action: AnyAction) {
+  try {
+    const images = yield call(ImagesService.loadMyImages)
+    yield put(ImagesActionTypes.successLoadImages(images))
+  } catch (e) {
+    yield put(ImagesActionTypes.errorLoadImages(e))
+  }
+}
+
+export function* loadAllImages(action: AnyAction) {
+  try {
+    const images = yield call(ImagesService.loadAllImages)
+    yield put(TimelineActionTypes.successLoadImages(images))
+  } catch (e) {
+    yield put(TimelineActionTypes.errorLoadImages(e))
+  }
 }

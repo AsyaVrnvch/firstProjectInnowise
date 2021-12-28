@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const FormContainer = styled.form`
   border-radius: 5px;
@@ -9,4 +9,5 @@ export const FormContainer = styled.form`
   text-align: left;
   border: 1px solid black;
   padding-top: 0px;
-`;
+  background-color: white;
+`

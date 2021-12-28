@@ -1,37 +1,56 @@
-import { AnyAction } from "redux";
-import { ImagesActionTypes } from "../actions/images";
+import { AnyAction } from 'redux'
+import { ImagesActionTypes } from '../actions/images'
+import { CanvasActionTypes } from '../actions/canvas'
 
 const initialState = {
-    error:'',
-};
-
-export interface ImageState {
-    error:string,
-
+  error: '',
+  images: [],
+  preloader: false,
 }
 
-export default function imagesState(
-  state: ImageState = initialState,
-  action: AnyAction
-){
-    switch (action.type) {
-        case ImagesActionTypes.LOADING_IMAGE:
-            return {
-                ...state,
-            }
+export interface Image {
+  id: string
+  url: string
+  createdAt: Date
+  username: string
+}
 
-        case ImagesActionTypes.SUCCESS_LOAD_IMAGE:
-        return {
-            ...state,
-        }
+export interface ImagesState {
+  error: string
+  images: Array<Image>
+  preloader: boolean
+}
 
-        case ImagesActionTypes.ERROR_LOAD_IMAGE:
-        return {
-            ...state,
-            error:action.payload
-        }
+export default function imagesState(state: ImagesState = initialState, action: AnyAction) {
+  switch (action.type) {
+    case ImagesActionTypes.LOAD_IMAGES:
+      return {
+        ...state,
+        preloader: true,
+      }
 
-        default:
-            return state;
-    }
-} 
+    case ImagesActionTypes.SUCCESS_LOAD_IMAGES:
+      return {
+        ...state,
+        images: action.payload,
+        preloader: false,
+      }
+
+    case ImagesActionTypes.ERROR_LOAD_IMAGES:
+      return {
+        ...state,
+        error: action.payload,
+        preloader: false,
+      }
+
+    case CanvasActionTypes.SUCCESS_SAVE_IMAGE:
+      return {
+        ...state,
+        images: [...state.images, action.payload],
+        preloader: false,
+      }
+
+    default:
+      return state
+  }
+}

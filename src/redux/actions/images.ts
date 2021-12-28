@@ -1,22 +1,23 @@
-import { createAction } from "redux-actions";
+import { createAction } from 'redux-actions'
+import { Image } from '../reducers/images'
 
 export enum ImagesActionTypes {
-  LOADING_IMAGE = "[Images] LOADING_IMAGE",
-  SUCCESS_LOAD_IMAGE = "[Images] SUCCESS_LOAD_IMAGE",
-  ERROR_LOAD_IMAGE = "[Images] ERROR_LOAD_IMAGE"
+  LOAD_IMAGES = '[Images] LOAD_IMAGES',
+  SUCCESS_LOAD_IMAGES = '[Images] SUCCESS_LOAD_IMAGES',
+  ERROR_LOAD_IMAGES = '[Images] ERROR_LOAD_IMAGES',
 }
 
-export const loadingImage = createAction(
-  ImagesActionTypes.LOADING_IMAGE,
-  (payload: { file:{} }) => payload
-);
-
-export const successLoadImage = createAction(
-  ImagesActionTypes.SUCCESS_LOAD_IMAGE,
+export const loadImages = createAction(
+  ImagesActionTypes.LOAD_IMAGES,
   (payload: {}) => payload
-);
+)
 
-export const errorLoadImage = createAction(
-  ImagesActionTypes.ERROR_LOAD_IMAGE,
+export const successLoadImages = createAction(
+  ImagesActionTypes.SUCCESS_LOAD_IMAGES,
+  (payload: { images: Array<Image> }) => payload
+)
+
+export const errorLoadImages = createAction(
+  ImagesActionTypes.ERROR_LOAD_IMAGES,
   (payload: { error: string }) => payload
-);
+)

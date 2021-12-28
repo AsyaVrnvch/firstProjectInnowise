@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const InputConteiner = styled.input`
   width: 100%;
@@ -8,4 +8,4 @@ export const InputConteiner = styled.input`
   padding: 5px;
   font-family: Calibri;
   margin: 3px auto 3px auto;
-`;
+`
