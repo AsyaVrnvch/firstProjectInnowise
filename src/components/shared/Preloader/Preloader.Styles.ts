@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { spinnerAnimation } from './animation'
 
 export const PreloaderContainer = styled.div`
   width: 100%;
@@ -17,19 +18,11 @@ export const Spinner = styled.span`
   border-width: 10px;
   border-top-color: #98efc0;
   border-left-color: #98efc0;
-  animation: spinner 1s linear infinite;
+  animation: ${spinnerAnimation} 1s linear infinite;
   border-bottom-color: transparent;
   border-right-color: transparent;
   border-style: solid;
   border-radius: 50%;
   box-sizing: border-box;
   display: block; 
-  @keyframes spinner {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
 `

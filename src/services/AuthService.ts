@@ -1,6 +1,5 @@
 import { fb, users } from '../config/firebase'
 import { getDoc } from 'firebase/firestore'
-import { defaultAvatarUrl } from "./Consts"
 
 export const getCurrentUser = async (uid: string) => {
   const docRef = await users.doc(uid)
@@ -44,8 +43,8 @@ export const signIn = async (email: string, password: string) => {
 export const signUp = async (email: string, password: string, username: string) => {
   const userData = await fb.auth().createUserWithEmailAndPassword(email, password)
   if (!userData) throw Error()
-  const uid = userData?.user?.uid
-  const imageUrl = defaultAvatarUrl;
+  const uid = userData.user?.uid
+  const imageUrl = process.env.REACT_APP_DEFAULT_AVATAR_URL;
   users.doc(uid).set({ uid, email, username, imageUrl, title: '' })
   users.doc(uid).collection('images')
 }
