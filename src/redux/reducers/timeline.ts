@@ -16,7 +16,7 @@ export interface TimelineState {
 
 export default function timelineState(state: TimelineState = initialState, action: AnyAction) {
   switch (action.type) {
-    case TimelineActionTypes.LOADING_IMAGES:
+    case TimelineActionTypes.LOAD_IMAGES:
       return {
         ...state,
         preloader: true,

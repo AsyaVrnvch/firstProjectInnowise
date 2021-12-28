@@ -15,10 +15,6 @@ const SignUp: React.FC = () => {
     }
   }, [isAuth])
 
-  useEffect(() => {
-    console.log('render signup page')
-  })
-
   return <SignUpForm />
 }
 

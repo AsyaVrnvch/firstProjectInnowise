@@ -1,5 +1,6 @@
 import { AnyAction } from 'redux'
-import { AuthActionTypes } from '../actions/auth'
+import { AuthActionTypes } from '../../actions/auth'
+import * as Consts from "./consts"
 
 const initialState = {
   regInfo: '',
@@ -17,13 +18,13 @@ export interface State {
 
 export default function authState(state: State = initialState, action: AnyAction) {
   switch (action.type) {
-    case AuthActionTypes.CHECKING_AUTH:
+    case AuthActionTypes.CHECK_AUTH:
       return {
         ...state,
         preloader: true,
       }
 
-    case AuthActionTypes.SIGNING_UP:
+    case AuthActionTypes.SIGN_UP:
       return {
         ...state,
         regInfo: '',
@@ -33,19 +34,14 @@ export default function authState(state: State = initialState, action: AnyAction
     case AuthActionTypes.SUCCESS_SIGN_UP:
       return {
         ...state,
-        regInfo: 'User registered successfully',
+        regInfo: Consts.successSignUp,
         authError: '',
         isAuth: false,
         preloader: false,
       }
 
     case AuthActionTypes.ERROR_SIGN_UP:
-      const errorSignUp =
-        action.payload.code === 'auth/email-already-in-use'
-          ? 'The email address is already in use by another account'
-          : action.payload.code === 'auth/network-request-failed'
-          ? 'Network error'
-          : action.payload.message
+      const errorSignUp = Consts.errorText(action.payload);
       return {
         ...state,
         regInfo: errorSignUp,
@@ -54,7 +50,7 @@ export default function authState(state: State = initialState, action: AnyAction
         preloader: false,
       }
 
-    case AuthActionTypes.SIGNING_IN:
+    case AuthActionTypes.SIGN_IN:
       return {
         ...state,
         authError: '',
@@ -70,14 +66,7 @@ export default function authState(state: State = initialState, action: AnyAction
       }
 
     case AuthActionTypes.ERROR_SIGN_IN:
-      const errorSignIn =
-        action.payload.code === 'auth/wrong-password'
-          ? 'The password is invalid'
-          : action.payload.code === 'auth/user-not-found'
-          ? 'This user is not registered'
-          : action.payload.code === 'auth/network-request-failed'
-          ? 'Network error'
-          : action.payload.message
+      const errorSignIn = Consts.errorText(action.payload);
       return {
         ...state,
         isAuth: false,
@@ -86,7 +75,7 @@ export default function authState(state: State = initialState, action: AnyAction
         preloader: false,
       }
 
-    case AuthActionTypes.SIGNING_OUT:
+    case AuthActionTypes.SIGN_OUT:
       return {
         ...state,
         preloader: true,

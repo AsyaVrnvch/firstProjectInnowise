@@ -4,8 +4,14 @@ import { useRef, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import * as canvasSelector from '../../../../../redux/selectors/canvas'
 import * as toolService from './toolService'
-import { savingImage, resetCanvas } from '../../../../../redux/actions/canvas'
+import { saveImage, resetCanvas } from '../../../../../redux/actions/canvas'
 import { toast } from 'react-toastify'
+import { Tools } from "../../../../../redux/reducers/canvas/consts"
+
+const canvasSize = {
+  height: 600,
+  width: 600,
+}
 
 const Canvas: React.FC = () => {
   const dispatch = useDispatch()
@@ -14,10 +20,6 @@ const Canvas: React.FC = () => {
   const ctx: CanvasRenderingContext2D | null = canvasRef.current
     ? canvasRef.current.getContext('2d')
     : null
-  const canvasSize = {
-    height: 600,
-    width: 600,
-  }
 
   const [mouse, setMouse] = useState<boolean>(false)
   const [dataUrl, setDataUrl] = useState<string>('')
@@ -36,14 +38,14 @@ const Canvas: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (tool === 'clear') toolService.clearCanvas(ctx, canvasSize)
+    if (tool === Tools.Clear) toolService.clearCanvas(ctx, canvasSize)
   }, [tool])
 
   useEffect(() => {
     if (isSaving) {
       canvasRef.current?.toBlob((blob) => {
         dispatch(
-          savingImage({
+          saveImage({
             blob,
             success: toastSuccessSave,
             error: toastErrorSave,
@@ -70,7 +72,7 @@ const Canvas: React.FC = () => {
     let startX = event.pageX - offset.left
     let startY = event.pageY - offset.top
     ctx.moveTo(startX, startY)
-    if (tool === 'pen') {
+    if (tool === Tools.Pen) {
       const offsetPen = getOffset(event)
       toolService.mouseDownPen(event, offsetPen)
     }
@@ -84,19 +86,19 @@ const Canvas: React.FC = () => {
     if (mouse) {
       const offset = getOffset(event)
       switch (tool) {
-        case 'eraser':
+        case Tools.Eraser:
           toolService.mouseMoveHandlerBrush(ctx, event, offset, 'white', width)
           break
 
-        case 'pen':
+        case Tools.Pen:
           toolService.mouseMoveHandlerPen(ctx, event, offset, color, 1)
           break
 
-        case 'brush':
+        case Tools.Brush:
           toolService.mouseMoveHandlerBrush(ctx, event, offset, color, width)
           break
 
-        case 'rectangle':
+        case Tools.Rectangle:
           toolService.mouseMoveHandlerRectangle(
             ctx,
             event,
@@ -109,7 +111,7 @@ const Canvas: React.FC = () => {
           )
           break
 
-        case 'circle':
+        case Tools.Circle:
           toolService.mouseMoveHandlerCircle(
             ctx,
             event,
@@ -122,7 +124,7 @@ const Canvas: React.FC = () => {
           )
           break
 
-        case 'line':
+        case Tools.Line:
           toolService.mouseMoveHandlerLine(
             ctx,
             event,
@@ -143,7 +145,7 @@ const Canvas: React.FC = () => {
 
   const mouseUpHandler = () => {
     setMouse(false)
-    if (tool === 'pen') {
+    if (tool === Tools.Pen) {
       toolService.mouseUpPen()
     }
     ctx?.closePath()

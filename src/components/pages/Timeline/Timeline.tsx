@@ -3,7 +3,7 @@ import ImageGrid from '../../shared/ImageGrid/ImageGrid'
 import { useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllImages } from '../../../redux/selectors/images'
-import { loadingImages } from '../../../redux/actions/timeline'
+import { loadImages } from '../../../redux/actions/timeline'
 import { Image } from '../../../redux/reducers/images'
 import SearchBar from './components/SearchBar/SearchBar'
 
@@ -14,7 +14,7 @@ const TimeLine: React.FC = () => {
   const [images, setImages] = useState<Image[]>([])
 
   useEffect(() => {
-    dispatch(loadingImages())
+    dispatch(loadImages())
   }, [])
 
   useEffect(() => {

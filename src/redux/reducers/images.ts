@@ -23,7 +23,7 @@ export interface ImagesState {
 
 export default function imagesState(state: ImagesState = initialState, action: AnyAction) {
   switch (action.type) {
-    case ImagesActionTypes.LOADING_IMAGES:
+    case ImagesActionTypes.LOAD_IMAGES:
       return {
         ...state,
         preloader: true,
@@ -43,7 +43,7 @@ export default function imagesState(state: ImagesState = initialState, action: A
         preloader: false,
       }
 
-    case CanvasActionTypes.SUCCESS_SAVED_IMAGE:
+    case CanvasActionTypes.SUCCESS_SAVE_IMAGE:
       return {
         ...state,
         images: [...state.images, action.payload],

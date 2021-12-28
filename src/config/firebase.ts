@@ -4,13 +4,13 @@ import 'firebase/compat/firestore'
 import 'firebase/compat/storage'
 
 firebase.initializeApp({
-  apiKey: 'AIzaSyCh28yppDN8wCs6CcZYRR9bH3ki-fD_TEo',
-  authDomain: 'first-project-innowise.firebaseapp.com',
-  projectId: 'first-project-innowise',
-  storageBucket: 'first-project-innowise.appspot.com',
-  messagingSenderId: '920735638530',
-  appId: '1:920735638530:web:ea47b9a16c323cb35ab31b',
-  measurementId: 'G-JW2Q5E4KMN',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 })
 
 const fb = firebase

@@ -5,12 +5,12 @@ import { AppRoutes } from '../../../config/routes'
 import { selectIsAuth } from '../../../redux/selectors/auth'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useEffect } from "react"
-import { signingOutAction } from '../../../redux/actions/auth'
+import { signOutAction } from '../../../redux/actions/auth'
 
 interface NavBarLinkProps extends React.HTMLAttributes<HTMLElement>{
   to: AppRoutes;
-  text: string
+  text: string;
+  right?: boolean;
 }
 
 const NavBarLink: React.FC<NavBarLinkProps> = ({to, text, ...props}) => {
@@ -27,7 +27,7 @@ const Navbar: React.FC = React.memo(() => {
   const history = useHistory()  
 
   function signOut() {
-    dispatch(signingOutAction())
+    dispatch(signOutAction())
     history.replace('/')
   }
 
@@ -49,7 +49,7 @@ const Navbar: React.FC = React.memo(() => {
         <NavBarLink 
           to={AppRoutes.SignIn} 
           text="Log out" 
-          className="right" 
+          right
           onClick={signOut}
         />
     </Styles.NavbarContainer>

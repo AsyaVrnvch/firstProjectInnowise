@@ -1,10 +1,12 @@
 import { fb, users } from '../config/firebase'
 import { getDoc } from 'firebase/firestore'
+import { defaultAvatarUrl } from "./Consts"
 
 export const getCurrentUser = async (uid: string) => {
   const docRef = await users.doc(uid)
   if (!docRef) throw Error()
   const snapshot = await getDoc(docRef)
+  if (!snapshot) throw Error()
   const data = await snapshot.data()
   if (!data) throw Error()
   return {
@@ -35,6 +37,7 @@ export const signIn = async (email: string, password: string) => {
   if (!userData) throw Error()
   const uid = userData.user?.uid || ''
   const data = await getCurrentUser(uid)
+  if (!data) throw Error()
   return data
 }
 
@@ -42,8 +45,7 @@ export const signUp = async (email: string, password: string, username: string) 
   const userData = await fb.auth().createUserWithEmailAndPassword(email, password)
   if (!userData) throw Error()
   const uid = userData?.user?.uid
-  const imageUrl =
-    'https://w7.pngwing.com/pngs/906/222/png-transparent-computer-icons-user-profile-avatar-french-people-computer-network-heroes-black.png'
+  const imageUrl = defaultAvatarUrl;
   users.doc(uid).set({ uid, email, username, imageUrl, title: '' })
   users.doc(uid).collection('images')
 }

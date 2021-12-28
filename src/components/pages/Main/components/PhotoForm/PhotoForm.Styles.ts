@@ -33,7 +33,7 @@ export const Label = styled.label`
   cursor: pointer;
   bottom: 0px;
   right: 0px;
-  :hover {
+  & :hover {
     background-color: #98efc0;
     border: 1px solid #98efc0;
   }

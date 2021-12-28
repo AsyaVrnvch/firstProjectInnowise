@@ -7,7 +7,7 @@ export const TitleInput = styled(TextField)`
   & input {
     font-family: 'Calibri Light';
     font-size: 20px;
-    padding: 3px 0px;
+    padding: 3px 0px; 
   }
 `  
 

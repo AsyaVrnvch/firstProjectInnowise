@@ -11,14 +11,14 @@ import { ProfileActionTypes } from '../actions/profile'
 
 export default function* rootSaga() {
   yield all([
-    takeEvery(AuthActionTypes.SIGNING_OUT, authSaga.signOutWorker),
-    takeEvery(AuthActionTypes.SIGNING_IN, authSaga.signInWorker),
-    takeEvery(AuthActionTypes.SIGNING_UP, authSaga.signUpWorker),
-    takeEvery(AuthActionTypes.CHECKING_AUTH, authSaga.checkAuthWorker),
-    takeEvery(ImagesActionTypes.LOADING_IMAGES, imagesSaga.loadingMyImagesWorker),
-    takeEvery(CanvasActionTypes.SAVING_IMAGE, canvasSaga.savingCanvasImage),
-    takeEvery(TimelineActionTypes.LOADING_IMAGES, imagesSaga.loadingAllImagesWorker),
-    takeEvery(ProfileActionTypes.LOADING_AVATAR, profileSaga.loadingAvatar),
-    takeEvery(ProfileActionTypes.CHANGING_TITLE, profileSaga.changingTitle),
+    takeEvery(AuthActionTypes.SIGN_OUT, authSaga.signOut),
+    takeEvery(AuthActionTypes.SIGN_IN, authSaga.signIn),
+    takeEvery(AuthActionTypes.SIGN_UP, authSaga.signUp),
+    takeEvery(AuthActionTypes.CHECK_AUTH, authSaga.checkAuth),
+    takeEvery(ImagesActionTypes.LOAD_IMAGES, imagesSaga.loadMyImages),
+    takeEvery(CanvasActionTypes.SAVE_IMAGE, canvasSaga.saveCanvasImage),
+    takeEvery(TimelineActionTypes.LOAD_IMAGES, imagesSaga.loadAllImages),
+    takeEvery(ProfileActionTypes.LOAD_AVATAR, profileSaga.loadAvatar),
+    takeEvery(ProfileActionTypes.CHANGE_TITLE, profileSaga.changeTitle),
   ])
 }

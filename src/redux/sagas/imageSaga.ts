@@ -4,7 +4,7 @@ import * as ImagesActionTypes from '../actions/images'
 import * as ImagesService from '../../services/ImageService'
 import * as TimelineActionTypes from '../actions/timeline'
 
-export function* loadingMyImagesWorker(action: AnyAction) {
+export function* loadMyImages(action: AnyAction) {
   try {
     const images = yield call(ImagesService.loadMyImages)
     yield put(ImagesActionTypes.successLoadImages(images))
@@ -13,7 +13,7 @@ export function* loadingMyImagesWorker(action: AnyAction) {
   }
 }
 
-export function* loadingAllImagesWorker(action: AnyAction) {
+export function* loadAllImages(action: AnyAction) {
   try {
     const images = yield call(ImagesService.loadAllImages)
     yield put(TimelineActionTypes.successLoadImages(images))

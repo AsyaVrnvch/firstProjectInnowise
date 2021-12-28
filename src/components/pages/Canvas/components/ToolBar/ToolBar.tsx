@@ -10,6 +10,7 @@ import Eraser from '@material-ui/icons/Adjust'
 import Pen from '@material-ui/icons/Edit'
 import { Remove as Line } from '@material-ui/icons'
 import { useDispatch } from 'react-redux'
+import { Tools } from "../../../../../redux/reducers/canvas/consts"
 import { changeToolAction, saveRequest } from '../../../../../redux/actions/canvas'
 
 interface ToolBarProps {}
@@ -27,25 +28,25 @@ const ToolBar: React.FC<ToolBarProps> = (props) => {
 
   return (
     <Styles.ToolBarContainer {...props}>
-      <BarButton onClick={handleClick('brush')}>
+      <BarButton onClick={handleClick(Tools.Brush)}>
         <Brush />
       </BarButton>
-      <BarButton onClick={handleClick('pen')}>
+      <BarButton onClick={handleClick(Tools.Pen)}>
         <Pen />
       </BarButton>
-      <BarButton onClick={handleClick('eraser')}>
+      <BarButton onClick={handleClick(Tools.Eraser)}>
         <Eraser />
       </BarButton>
-      <BarButton onClick={handleClick('line')}>
+      <BarButton onClick={handleClick(Tools.Line)}>
         <Line />
       </BarButton>
-      <BarButton onClick={handleClick('circle')}>
+      <BarButton onClick={handleClick(Tools.Circle)}>
         <Circle />
       </BarButton>
-      <BarButton onClick={handleClick('rectangle')}>
+      <BarButton onClick={handleClick(Tools.Rectangle)}>
         <Rectangle />
       </BarButton>
-      <BarButton className="right" onClick={handleClick('clear')}>
+      <BarButton right onClick={handleClick(Tools.Clear)}>
         <Clear />
       </BarButton>
       <BarButton onClick={saveImage}>

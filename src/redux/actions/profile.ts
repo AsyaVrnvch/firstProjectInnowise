@@ -1,17 +1,17 @@
 import { createAction } from 'redux-actions'
 
 export enum ProfileActionTypes {
-  LOADING_AVATAR = '[Profile] LOADING_AVATAR',
+  LOAD_AVATAR = '[Profile] LOAD_AVATAR',
   SUCCESS_LOAD_AVATAR = '[Profile] SUCCESS_LOAD_AVATAR',
   ERROR_LOAD_AVATAR = '[Profile] ERROR_LOAD_AVATAR',
 
-  CHANGING_TITLE = '[Profile] CHANGING_TITLE',
+  CHANGE_TITLE = '[Profile] CHANGE_TITLE',
   SUCCESS_CHANGE_TITLE = '[Profile] SUCCESS_CHANGE_TITLE',
   ERROR_CHANGE_TITLE = '[Profile] ERROR_CHANGE_TITLE',
 }
 
-export const loadingAvatar = createAction(
-  ProfileActionTypes.LOADING_AVATAR,
+export const loadAvatar = createAction(
+  ProfileActionTypes.LOAD_AVATAR,
   (payload: { file: File }) => payload
 )
 
@@ -25,8 +25,8 @@ export const errorLoadAvatar = createAction(
   (payload: { error: string }) => payload
 )
 
-export const changingTitle = createAction(
-  ProfileActionTypes.CHANGING_TITLE,
+export const changeTitle = createAction(
+  ProfileActionTypes.CHANGE_TITLE,
   (payload: { title: string }) => payload
 )
 

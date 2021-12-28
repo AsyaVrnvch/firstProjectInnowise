@@ -5,7 +5,7 @@ import Input from '../../../../shared/Input/Input'
 import Label from '../../../../shared/Label/Label'
 import Error from '../../../../shared/Error/Error'
 import { useSelector, useDispatch } from 'react-redux'
-import { signingInAction } from '../../../../../redux/actions/auth'
+import { signInAction } from '../../../../../redux/actions/auth'
 import { selectAuthError } from '../../../../../redux/selectors/auth'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -31,14 +31,15 @@ const SignInForm: React.FC = () => {
   useEffect(() => {
     if (firstRun.current) {
       firstRun.current = false
-      return
     }
-    if (errorAuth) toastAuth()
+    else{
+      if (errorAuth) toastAuth()
+    }
   }, [errorAuth])
 
   const onSubmit = (data: { email: string; password: string }) => {
     dispatch(
-      signingInAction({
+      signInAction({
         email: data.email,
         password: data.password,
       })

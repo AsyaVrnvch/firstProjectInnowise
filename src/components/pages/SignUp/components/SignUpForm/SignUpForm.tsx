@@ -5,7 +5,7 @@ import Input from '../../../../shared/Input/Input'
 import Label from '../../../../shared/Label/Label'
 import Error from '../../../../shared/Error/Error'
 import { useSelector, useDispatch } from 'react-redux'
-import { signingUpAction } from '../../../../../redux/actions/auth'
+import { signUpAction } from '../../../../../redux/actions/auth'
 import { selectRegistrationInfo } from '../../../../../redux/selectors/auth'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -22,9 +22,10 @@ const SignUpForm: React.FC = () => {
   useEffect(() => {
     if (firstRun.current) {
       firstRun.current = false
-      return
     }
-    if (registrationInfo) toastReg()
+    else{
+      if (registrationInfo) toastReg()
+    }
   }, [registrationInfo])
 
   const {
@@ -43,7 +44,7 @@ const SignUpForm: React.FC = () => {
     username: string
   }) => {
     dispatch(
-      signingUpAction({
+      signUpAction({
         email: data.email,
         password: data.password,
         username: data.username,

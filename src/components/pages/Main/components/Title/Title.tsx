@@ -3,7 +3,7 @@ import * as Styles from './Title.Styles'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectTitle } from '../../../../../redux/selectors/profile'
-import { changingTitle } from '../../../../../redux/actions/profile'
+import { changeTitle } from '../../../../../redux/actions/profile'
 
 interface TitleProps {}
 
@@ -18,7 +18,7 @@ const Title: React.FC<TitleProps> = React.memo(() => {
 
   const handleClick = (value: boolean) => () => {
     if (!value) {
-      if (change) dispatch(changingTitle(title))
+      if (change) dispatch(changeTitle(title))
     } else {
       setTitle(titleText)
     }
@@ -40,7 +40,7 @@ const Title: React.FC<TitleProps> = React.memo(() => {
         </div>
       ) : ( 
         <div>
-          <Styles.Span className="title">{titleText || 'Welcome'}</Styles.Span>
+          <Styles.Span>{titleText || 'Welcome'}</Styles.Span>
           <Styles.AddIcon onClick={handleClick(true)} />
         </div>
       )}

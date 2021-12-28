@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
-import * as auth from '../reducers/auth'
-import * as canvas from '../reducers/canvas'
+import * as auth from '../reducers/auth/auth'
+import * as canvas from '../reducers/canvas/canvas'
 import * as images from '../reducers/images'
 import * as timeline from '../reducers/timeline'
 import * as profile from '../reducers/profile'

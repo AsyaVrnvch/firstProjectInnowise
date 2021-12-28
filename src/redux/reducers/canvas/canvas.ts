@@ -1,10 +1,11 @@
 import { AnyAction } from 'redux'
-import { CanvasActionTypes } from '../actions/canvas'
+import { CanvasActionTypes } from '../../actions/canvas'
+import { Tools } from "./consts"
 
 const initialState = {
   error: '',
   isSaving: false,
-  tool: 'brush',
+  tool: Tools.Brush,
   color: 'black',
   width: 1,
   preloader: false,
@@ -13,7 +14,7 @@ const initialState = {
 export interface CanvasState {
   error: string
   isSaving: boolean
-  tool: string
+  tool: Tools,
   color: string
   width: number
   preloader: boolean
@@ -43,7 +44,7 @@ export default function canvasState(state: CanvasState = initialState, action: A
       return {
         error: '',
         isSaving: false,
-        tool: 'brush',
+        tool: Tools.Brush,
         color: 'black',
         width: 1,
         preloader: false,
@@ -56,20 +57,20 @@ export default function canvasState(state: CanvasState = initialState, action: A
         preloader: true,
       }
 
-    case CanvasActionTypes.SAVING_IMAGE:
+    case CanvasActionTypes.SAVE_IMAGE:
       return {
         ...state,
         isSaving: false,
         preloader: true,
       }
 
-    case CanvasActionTypes.SUCCESS_SAVED_IMAGE:
+    case CanvasActionTypes.SUCCESS_SAVE_IMAGE:
       return {
         ...state,
         preloader: false,
       }
 
-    case CanvasActionTypes.ERROR_SAVED_IMAGE:
+    case CanvasActionTypes.ERROR_SAVE_IMAGE:
       return {
         ...state,
         preloader: false,

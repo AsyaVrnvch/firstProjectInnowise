@@ -19,8 +19,7 @@ export const mouseMoveHandlerBrush = (
 }
 
 //PEN
-
-var ctx2, pointer, points
+let ctx2, pointer, points
 
 export const mouseDownPen = (
   e: React.MouseEvent,

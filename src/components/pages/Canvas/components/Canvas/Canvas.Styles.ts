@@ -5,7 +5,12 @@ export const CanvasContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-export const Canvas = styled.canvas`
+interface CanvasProps{
+  width:number, 
+  height:number
+}
+
+export const Canvas = styled.canvas<CanvasProps>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
 `

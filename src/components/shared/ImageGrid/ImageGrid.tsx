@@ -2,9 +2,8 @@ import React from 'react'
 import * as Styles from './ImageGrid.Styles'
 import UserImage from '../UserImage/UserImage'
 import { Image } from '../../../redux/reducers/images'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import ImageModal from '../../modals/ImageModal/ImageModal'
-import { useEffect, useCallback, useMemo } from 'react'
 
 interface ImageGridProps {
   allImages: Array<Image>
@@ -13,10 +12,6 @@ interface ImageGridProps {
 
 const ImageGrid: React.FC<ImageGridProps> = React.memo(({ allImages, username }) => {
   const [selectedImage, setSelectedImage] = useState<Image | null>()
-
-  useEffect(() => { 
-    console.log('render image grid')
-  })
 
   const setImage = useCallback((image: Image) => () => {
     setSelectedImage(image)

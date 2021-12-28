@@ -43,7 +43,7 @@ export default function profileState(state: ProfileState = initialState, action:
         currentUser: emptyUser,
       }
 
-    case ProfileActionTypes.LOADING_AVATAR:
+    case ProfileActionTypes.LOAD_AVATAR:
       return {
         ...state,
         preloader: true,
@@ -65,7 +65,7 @@ export default function profileState(state: ProfileState = initialState, action:
         preloader: false,
       }
 
-    case ProfileActionTypes.CHANGING_TITLE:
+    case ProfileActionTypes.CHANGE_TITLE:
       return {
         ...state,
         preloader: true,

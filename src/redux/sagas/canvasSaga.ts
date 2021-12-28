@@ -3,13 +3,13 @@ import { AnyAction } from 'redux'
 import * as CanvasActionTypes from '../actions/canvas'
 import * as CanvasService from '../../services/CanvasService'
 
-export function* savingCanvasImage(action: AnyAction) {
+export function* saveCanvasImage(action: AnyAction) {
   try {
     const image = yield call(CanvasService.saveImage, action.payload.blob)
     action.payload.success()
-    yield put(CanvasActionTypes.successSavedImage(image))
+    yield put(CanvasActionTypes.successSaveImage(image))
   } catch (e) {
     action.payload.error()
-    yield put(CanvasActionTypes.errorSavedImage(e))
+    yield put(CanvasActionTypes.errorSaveImage(e))
   }
 }

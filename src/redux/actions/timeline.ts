@@ -2,13 +2,13 @@ import { createAction } from 'redux-actions'
 import { Image } from '../reducers/images'
 
 export enum TimelineActionTypes {
-  LOADING_IMAGES = '[Timeline] LOADING_IMAGES',
+  LOAD_IMAGES = '[Timeline] LOAD_IMAGES',
   SUCCESS_LOAD_IMAGES = '[Timeline] SUCCESS_LOAD_IMAGES',
   ERROR_LOAD_IMAGES = '[Timeline] ERROR_LOAD_IMAGES',
 }
 
-export const loadingImages = createAction(
-  TimelineActionTypes.LOADING_IMAGES,
+export const loadImages = createAction(
+  TimelineActionTypes.LOAD_IMAGES,
   (payload: {}) => payload
 )
 

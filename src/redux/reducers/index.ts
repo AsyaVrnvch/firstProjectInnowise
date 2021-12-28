@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
-import authState, { State } from './auth'
+import authState, { State } from './auth/auth'
 import imagesState, { ImagesState } from './images'
-import canvasState, { CanvasState } from './canvas'
+import canvasState, { CanvasState } from './canvas/canvas'
 import timelineState, { TimelineState } from './timeline'
 import profileState, { ProfileState } from './profile'
 

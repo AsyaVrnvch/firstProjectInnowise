@@ -8,7 +8,7 @@ import CanvasPage from './components/pages/Canvas/Canvas'
 import TimeLine from './components/pages/Timeline/Timeline'
 import { AppRoutes } from './config/routes'
 import { useEffect } from 'react'
-import { checkingAuth } from './redux/actions/auth'
+import { checkAuth } from './redux/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { fb } from './config/firebase'
 import Preloader from './components/shared/Preloader/Preloader'
@@ -16,6 +16,7 @@ import * as preloader from './redux/selectors/preloader'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { css } from 'glamor'
+import 'firebase/compat/auth'
 
 function App() {
   const dispatch = useDispatch()
@@ -30,7 +31,7 @@ function App() {
     fb.auth().onAuthStateChanged((user) => {
       if (user) {
         const uid = user?.uid
-        dispatch(checkingAuth(uid))
+        dispatch(checkAuth(uid))
       }
     })
   }, [])

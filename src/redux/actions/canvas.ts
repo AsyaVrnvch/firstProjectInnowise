@@ -1,5 +1,6 @@
 import { createAction } from 'redux-actions'
 import { Image } from '../reducers/images'
+import { Tools } from "../reducers/canvas/consts"
 
 export enum CanvasActionTypes {
   CHANGE_TOOL = '[Canvas] CHANGE_TOOL',
@@ -9,14 +10,14 @@ export enum CanvasActionTypes {
   RESET_STATE = '[Canvas] RESET_STATE',
 
   SAVE_REQUEST = '[Canvas] SAVE_REQUEST',
-  SAVING_IMAGE = '[Canvas] SAVING_IMAGE',
-  SUCCESS_SAVED_IMAGE = '[Canvas] SUCCESS_SAVED_IMAGE',
-  ERROR_SAVED_IMAGE = '[Canvas] ERROR_SAVED_IMAGE',
+  SAVE_IMAGE = '[Canvas] SAVE_IMAGE',
+  SUCCESS_SAVE_IMAGE = '[Canvas] SUCCESS_SAVE_IMAGE',
+  ERROR_SAVE_IMAGE = '[Canvas] ERROR_SAVE_IMAGE',
 }
 
 export const changeToolAction = createAction(
   CanvasActionTypes.CHANGE_TOOL,
-  (payload: { tool: string }) => payload
+  (payload: { tool: Tools }) => payload
 )
 
 export const changeWidth = createAction(
@@ -33,17 +34,17 @@ export const resetCanvas = createAction(CanvasActionTypes.RESET_STATE)
 
 export const saveRequest = createAction(CanvasActionTypes.SAVE_REQUEST)
 
-export const savingImage = createAction(
-  CanvasActionTypes.SAVING_IMAGE,
+export const saveImage = createAction(
+  CanvasActionTypes.SAVE_IMAGE,
   (payload: { blob: Blob; success: (text: string) => void ; error: (text: string) => void }) => payload
 )
 
-export const successSavedImage = createAction(
-  CanvasActionTypes.SUCCESS_SAVED_IMAGE,
+export const successSaveImage = createAction(
+  CanvasActionTypes.SUCCESS_SAVE_IMAGE,
   (payload: Image) => payload
 )
 
-export const errorSavedImage = createAction(
-  CanvasActionTypes.ERROR_SAVED_IMAGE,
+export const errorSaveImage = createAction(
+  CanvasActionTypes.ERROR_SAVE_IMAGE,
   (payload: { e: string }) => payload
 )

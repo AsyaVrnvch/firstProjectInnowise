@@ -14,10 +14,6 @@ const ImageModal: React.FC<ImageModalProps> = ({ selectedImage, setSelectedImage
     }
   }
 
-  useEffect(() => {
-    console.log('render image modal')
-  })
-
   return (
     <Styles.ImageModalContainer className="backdrop" onClick={handleClick}>
       <Styles.Div>
